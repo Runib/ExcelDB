@@ -5,9 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektTechniki"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1000"
+        Title="MainWindow" Height="600" Width="1000"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
-    <Grid>
-        <Button Height="50" Width="50" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,820,0" Content="{Binding Text, Mode=TwoWay}"></Button>  
+    <Grid Background="Lavender">
+        <DockPanel>
+            <Menu Width="auto" Height="20" Background="#FFA9D1F4" DockPanel.Dock="Top"
+                  VerticalAlignment="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New"/>
+                    <MenuItem Header="_Open"/>
+                    <Separator />
+                    <MenuItem Header="_Exit" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+
+        <TextBox Margin="30 30 0 0" Height="32" VerticalAlignment="Top" Width="100"
+                 HorizontalAlignment="Left" Name="AddBox" />
+    
+        <Button Content="Dodaj" Height="32" HorizontalAlignment="Left" Margin="150,30,0,0" 
+                Name="button1" VerticalAlignment="Top" Width="88" Click="button1_Click" 
+                Background="White" >
+            
+        </Button>
+        
+
+
+
+
+
+
+
+
     </Grid>
 </Window>
