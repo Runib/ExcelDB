@@ -8,27 +8,27 @@
         Title="MainWindow" Height="600" Width="1000"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     <Grid Background="Lavender">
-        <DockPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
             <Menu Width="auto" Height="20" Background="#FFA9D1F4" DockPanel.Dock="Top"
-                  VerticalAlignment="Top">
+                  VerticalAlignment="Top" Grid.Row="0">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New"/>
+                    <MenuItem Header="_New" Command="{Binding NavigateCommand}"/>
                     <MenuItem Header="_Open"/>
                     <Separator />
                     <MenuItem Header="_Exit" />
                 </MenuItem>
             </Menu>
-        </DockPanel>
 
-        <TextBox Margin="30 30 0 0" Height="32" VerticalAlignment="Top" Width="100"
-                 HorizontalAlignment="Left" Name="AddBox" />
-    
-        <Button Content="Dodaj" Height="32" HorizontalAlignment="Left" Margin="150,30,0,0" 
-                Name="button1" VerticalAlignment="Top" Width="88" Click="button1_Click" 
-                Background="White" >
-            
-        </Button>
+        <Frame Name="Frame" NavigationUIVisibility="Hidden" Grid.Row="1"></Frame>
         
+     
+        
+        
+
 
 
 

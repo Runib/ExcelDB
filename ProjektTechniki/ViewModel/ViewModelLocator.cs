@@ -25,6 +25,9 @@ namespace ProjektTechniki.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
+
+        public const string MainPageKey = "MainPage";
+        public const string CreateTableKey = "CreateTableView";
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>

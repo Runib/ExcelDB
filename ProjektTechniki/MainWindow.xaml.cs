@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Ioc;
+using ProjektTechniki.Services;
+using ProjektTechniki.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +23,18 @@ namespace ProjektTechniki
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private MyNavigationService navService;
+
         public MainWindow()
         {
+                
             InitializeComponent();
+            navService = new MyNavigationService(Frame);
+            SimpleIoc.Default.Register<IMyNavigationService>(() => navService);
+            navService.NavigateTo(ViewModelLocator.MainPageKey);
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
