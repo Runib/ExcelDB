@@ -1,7 +1,9 @@
+using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Ioc;
 using ProjektTechniki.Services;
+using CommonServiceLocator;
 
 namespace ProjektTechniki.ViewModel
 {
@@ -20,6 +22,13 @@ namespace ProjektTechniki.ViewModel
         {
             get { return text; }
             set { text = value; RaisePropertyChanged(() => Text); }
+        }
+
+      
+
+        public void ShowFirstView()
+        {
+            ServiceLocator.Current.GetInstance<MyNavigationService>().NavigateTo("FirstPageViewModel");
         }
     }
 }

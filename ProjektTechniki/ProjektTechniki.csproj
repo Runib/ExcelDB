@@ -71,7 +71,9 @@
     </ApplicationDefinition>
     <Compile Include="Services\IMyNavigationService.cs" />
     <Compile Include="Services\MyNavigationService.cs" />
+    <Compile Include="ViewModel\FirstPageViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\NavigableViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\CreateTableView.xaml.cs">
       <DependentUpon>CreateTableView.xaml</DependentUpon>

@@ -30,11 +30,20 @@ namespace ProjektTechniki
         {
                 
             InitializeComponent();
-            navService = new MyNavigationService(Frame);
-            SimpleIoc.Default.Register<IMyNavigationService>(() => navService);
-            navService.NavigateTo(ViewModelLocator.MainPageKey);
+            ((MainViewModel)this.DataContext).ShowFirstView();
+            Frame.LoadCompleted += (s, e) => UpdateFrameDataContext();
+            Frame.DataContextChanged += (s, e) => UpdateFrameDataContext();
+            
         }
 
+        private void UpdateFrameDataContext()
+        {
+            Page view = (Page)Frame.Content;
+            if(view!=null)
+            {
+                view.DataContext = Frame.DataContext;
+            }
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

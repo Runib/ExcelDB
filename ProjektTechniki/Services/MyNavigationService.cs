@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using ProjektTechniki.ViewModel;
 
 namespace ProjektTechniki.Services
 {
@@ -31,6 +32,11 @@ namespace ProjektTechniki.Services
         }
 
         public void NavigateTo(string pageKey, object parameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void AddNavigableElement(Func<FirstPageViewModel> getInstance)
         {
             throw new NotImplementedException();
         }
