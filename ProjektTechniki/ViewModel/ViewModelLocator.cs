@@ -16,6 +16,7 @@ using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using ProjektTechniki.Services;
+using System;
 
 namespace ProjektTechniki.ViewModel
 {
@@ -31,17 +32,26 @@ namespace ProjektTechniki.ViewModel
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
-     
-            public ViewModelLocator()
-            {
-                ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-                SimpleIoc.Default.Register<MainViewModel>();
-                MyNavigationService navService = new MyNavigationService(Main);
-                SimpleIoc.Default.Register<FirstPageViewModel>();
-                navService.AddNavigableElement(SimpleIoc.Default.GetInstance<FirstPageViewModel>);
-                SimpleIoc.Default.Register<MyNavigationService>(() => navService);
-            }
+
+        static ViewModelLocator()
+        {
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
+            SetupNavigation();
+
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<FirstPageViewModel>();
+           
+        }
+        private static void SetupNavigation()
+        {
+            var navigationService = new MyNavigationService();
+            navigationService.Configure("FirstView", new Uri("../Views/LoginView.xaml", UriKind.Relative));
         
+
+            SimpleIoc.Default.Register<IMyNavigationService>(() => navigationService);
+        }
+
 
         public MainViewModel Main
         {

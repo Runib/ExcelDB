@@ -9,6 +9,6 @@ namespace ProjektTechniki.Services
 {
     public interface IMyNavigationService:INavigationService
     {
-        
+        object Parameter { get; }
     }
 }
