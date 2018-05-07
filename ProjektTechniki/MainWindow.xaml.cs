@@ -23,22 +23,9 @@ namespace ProjektTechniki
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        private MyNavigationService navService;
-
         public MainWindow()
         {
-                
             InitializeComponent();
-           
-            
-        }
-
-      
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

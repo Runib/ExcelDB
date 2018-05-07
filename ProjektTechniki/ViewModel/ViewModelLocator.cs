@@ -27,7 +27,7 @@ namespace ProjektTechniki.ViewModel
     public class ViewModelLocator
     {
 
-        public const string MainPageKey = "MainPage";
+        
         public const string CreateTableKey = "CreateTableView";
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
@@ -40,13 +40,13 @@ namespace ProjektTechniki.ViewModel
             SetupNavigation();
 
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<FirstPageViewModel>();
+            SimpleIoc.Default.Register<CreateTableViewModel>();
            
         }
         private static void SetupNavigation()
         {
             var navigationService = new MyNavigationService();
-            navigationService.Configure("FirstView", new Uri("../Views/LoginView.xaml", UriKind.Relative));
+            navigationService.Configure("CreateTableView", new Uri("../View/CreateTableView.xaml", UriKind.Relative));
         
 
             SimpleIoc.Default.Register<IMyNavigationService>(() => navigationService);

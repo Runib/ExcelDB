@@ -9,15 +9,19 @@ namespace ProjektTechniki.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        public RelayCommand NavigateCommand { get; set; }
+        private IMyNavigationService navigationService;
+
+        public RelayCommand CreateTableCommand { get; set; }
       
-        public MainViewModel()
+        public MainViewModel(IMyNavigationService navService)
         {
-            
+            navigationService = navService;
+            InitCommand();
         }
 
-       
-
-      
+        private void InitCommand()
+        {
+            CreateTableCommand = new RelayCommand(() => { navigationService.NavigateTo(ViewModelLocator.CreateTableKey); });
+        }
     }
 }

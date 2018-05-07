@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         xmlns:local="clr-namespace:ProjektTechniki"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000"
@@ -17,26 +19,18 @@
             <Menu Width="auto" Height="20" Background="#FFA9D1F4" DockPanel.Dock="Top"
                   VerticalAlignment="Top" Grid.Row="0">
                 <MenuItem Header="_File">
-                    <MenuItem Header="_New" Command="{Binding NavigateCommand}"/>
+                    <MenuItem Header="_New" Command="{Binding CreateTableCommand}"/>
                     <MenuItem Header="_Open"/>
                     <Separator />
                     <MenuItem Header="_Exit" />
                 </MenuItem>
             </Menu>
 
-        <Frame Name="Frame" NavigationUIVisibility="Hidden" Grid.Row="1"></Frame>
-        
-     
-        
-        
-
-
-
-
-
-
-
-
-
+        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1"></Frame>
     </Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="OnLoad">
+            <cmd:EventToCommand Command="{Binding OnLoad}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 </Window>
