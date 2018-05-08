@@ -5,10 +5,25 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProjektTechniki.View"
       mc:Ignorable="d" 
-      d:DesignHeight="1060" d:DesignWidth="1920"
+      Height="600" Width="1000"
       Title="CreateTableView">
 
     <Grid Background="White">
+        <TextBlock Margin="40 70 0 0" FontSize="20" Width="180"
+                   VerticalAlignment="Top" HorizontalAlignment="Left">Podaj nazwę tabeli:</TextBlock>
+        <TextBox Height="30" Width="180" Margin="235 70 0 0" HorizontalAlignment="Left"
+                 VerticalAlignment="Top" FontSize="20"></TextBox>
+        <Button Height="30" Width="80" Margin="435 70 0 0"
+                HorizontalAlignment="Left" VerticalAlignment="Top">Stworz</Button>
+        <TextBlock Margin="40 150 0 0" FontSize="20" Width="300"
+                   VerticalAlignment="Top" HorizontalAlignment="Left">Dodaj kolumnę: (nazwa kolumny)</TextBlock>
+        <TextBox Height="30" Width="180" Margin="345 150 0 0" HorizontalAlignment="Left"
+                 VerticalAlignment="Top" FontSize="20"></TextBox>
+        <Button Height="30" Width="80" Margin="545 150 0 0"
+                HorizontalAlignment="Left" VerticalAlignment="Top">Dodaj</Button>
+
+        
+            
         
     </Grid>
 </Page>
