@@ -23,6 +23,12 @@ namespace ProjektTechniki.View
         public CreateTableView()
         {
             InitializeComponent();
+            InitCommand();
+        }
+
+        private void InitCommand()
+        {
+            CreateTableCommand = //stworzenie pliku xls
         }
     }
 }

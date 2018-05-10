@@ -60,7 +60,15 @@ namespace ProjektTechniki.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public CreateTableViewModel CreateTableViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CreateTableViewModel>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
