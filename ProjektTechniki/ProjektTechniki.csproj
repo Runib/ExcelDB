@@ -74,11 +74,15 @@
     </ApplicationDefinition>
     <Compile Include="Services\IMyNavigationService.cs" />
     <Compile Include="Services\MyNavigationService.cs" />
+    <Compile Include="ViewModel\CreateBaseViewModel.cs" />
     <Compile Include="ViewModel\CreateTableViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\CreateTableView.xaml.cs">
       <DependentUpon>CreateTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateBaseView.xaml.cs">
+      <DependentUpon>CreateBaseView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -93,6 +97,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\CreateTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateBaseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

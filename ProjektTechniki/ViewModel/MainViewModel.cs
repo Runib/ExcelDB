@@ -11,7 +11,7 @@ namespace ProjektTechniki.ViewModel
     {
         private IMyNavigationService navigationService;
 
-        public RelayCommand CreateTableCommand { get; set; }
+        public RelayCommand CreateBaseCommand { get; set; }
       
         public MainViewModel(IMyNavigationService navService)
         {
@@ -21,7 +21,7 @@ namespace ProjektTechniki.ViewModel
 
         private void InitCommand()
         {
-            CreateTableCommand = new RelayCommand(() => { navigationService.NavigateTo(ViewModelLocator.CreateTableKey); });
+            CreateBaseCommand = new RelayCommand(() => { navigationService.NavigateTo(ViewModelLocator.CreateBaseKey); });
         }
     }
 }

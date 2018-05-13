@@ -16,15 +16,18 @@ using System.Windows.Shapes;
 namespace ProjektTechniki.View
 {
     /// <summary>
-    /// Logika interakcji dla klasy CreateTableView.xaml
+    /// Logika interakcji dla klasy CreateTableViewModel.xaml
     /// </summary>
-    public partial class CreateTableView : Page
+    public partial class CreateBaseViewModel : Page
     {
-        public CreateTableView()
+        public CreateBaseViewModel()
         {
             InitializeComponent();
-       
         }
-        
+
+        private void InitializeComponent()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
