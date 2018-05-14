@@ -10,7 +10,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ProjektTechniki.View
@@ -18,13 +17,11 @@ namespace ProjektTechniki.View
     /// <summary>
     /// Logika interakcji dla klasy CreateTableView.xaml
     /// </summary>
-    public partial class CreateTableView : Page
+    public partial class CreateTableView : Window
     {
         public CreateTableView()
         {
             InitializeComponent();
-       
         }
-        
     }
 }

@@ -1,13 +1,27 @@
 ﻿<Page x:Class="ProjektTechniki.View.CreateTableViewModel"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ProjektTechniki.View"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+        xmlns:local="clr-namespace:ProjektTechniki"
         mc:Ignorable="d"
-        Title="CreateBaseView" Height="200" Width="450"
-        DataContext="{Binding}">
-    <Grid Background="red">
-        
+        Title="CreateBaseView" Height="170" Width="450"
+        DataContext="{Binding CreateBaseViewModel,Source={StaticResource Locator}}">
+    <Grid Background="white">
+        <TextBlock VerticalAlignment="Center"
+                 HorizontalAlignment="Left" Margin="50 0 0 0" FontSize="18">Podaj nazwę:</TextBlock>
+        <TextBox Height="20" Width="130" Background="white" VerticalAlignment="Center"
+                 HorizontalAlignment="Center" Margin="20 0 0 0" Text="{Binding BaseName}"></TextBox>
+        <Button Height="20" Width="70" Background="gray"
+                VerticalAlignment="Center" HorizontalAlignment="Center" Margin="250 0 0 0" Foreground="White"
+                Command="{Binding CreateBaseCommand}">Stwórz</Button>
+        <Frame Name="CreateBaseFrame" NavigationUIVisibility="Hidden" Grid.Row="1"></Frame>
     </Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="OnLoad">
+            <cmd:EventToCommand Command="{Binding OnLoad}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 </Page>
