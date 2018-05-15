@@ -89,15 +89,23 @@
     </ApplicationDefinition>
     <Compile Include="Services\IMyNavigationService.cs" />
     <Compile Include="Services\MyNavigationService.cs" />
+    <Compile Include="ViewModel\ActionLoadedBaseViewModel.cs" />
     <Compile Include="ViewModel\CreateBaseViewModel.cs" />
     <Compile Include="ViewModel\CreateTableViewModel.cs" />
+    <Compile Include="ViewModel\LoadBaseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\ActionLoadedBaseView.xaml.cs">
+      <DependentUpon>ActionLoadedBaseView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CreateBaseView.xaml.cs">
       <DependentUpon>CreateBaseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CreateTableView.xaml.cs">
       <DependentUpon>CreateTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoadBaseView.xaml.cs">
+      <DependentUpon>LoadBaseView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -111,11 +119,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ActionLoadedBaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CreateBaseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CreateTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoadBaseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

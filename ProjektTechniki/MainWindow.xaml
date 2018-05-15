@@ -22,7 +22,7 @@
         <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Row="1"></Frame>
     </Grid>
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="OnLoad">
+        <i:EventTrigger EventName="Loaded">
             <cmd:EventToCommand Command="{Binding OnLoad}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
