@@ -26,10 +26,11 @@ namespace ProjektTechniki.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
-
+        public static object Param;
         
         public const string CreateTableKey = "CreateTableView";
         public const string CreateBaseKey = "CreateBaseView";
+        public const string LoadBaseKey = "LoadBaseView";
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
@@ -43,6 +44,9 @@ namespace ProjektTechniki.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<CreateTableViewModel>();
             SimpleIoc.Default.Register<CreateBaseViewModel>();
+            SimpleIoc.Default.Register<LoadBaseViewModel>();
+            SimpleIoc.Default.Register<ActionLoadedBaseViewModel>();
+
 
         }
         private static void SetupNavigation()
@@ -50,7 +54,7 @@ namespace ProjektTechniki.ViewModel
             var navigationService = new MyNavigationService();
             navigationService.Configure("CreateTableView", new Uri("../View/CreateTableView.xaml", UriKind.Relative));
             navigationService.Configure("CreateBaseView", new Uri("../View/CreateBaseView.xaml", UriKind.Relative));
-
+            navigationService.Configure("LoadBaseView", new Uri("../View/LoadBaseView.xaml", UriKind.Relative));
             SimpleIoc.Default.Register<IMyNavigationService>(() => navigationService);
         }
 
@@ -73,6 +77,22 @@ namespace ProjektTechniki.ViewModel
             }
         }
 
+        public LoadBaseViewModel LoadBase
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<LoadBaseViewModel>();
+            }
+        }
+
+        public ActionLoadedBaseViewModel ActionLoadedBase
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ActionLoadedBaseViewModel>();
+            }
+        }
+        
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
