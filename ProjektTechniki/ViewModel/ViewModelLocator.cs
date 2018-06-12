@@ -27,20 +27,10 @@ namespace ProjektTechniki.ViewModel
     public class ViewModelLocator
     {
         public static object Param;
-<<<<<<< HEAD
-        public static object ColumnsName;
-
-=======
         
->>>>>>> 147a88c... Addded Load, Create and Displaydupadupacycki
         public const string CreateTableKey = "CreateTableView";
-        public const string AddRecordKey = "AddRecordView";
         public const string CreateBaseKey = "CreateBaseView";
         public const string LoadBaseKey = "LoadBaseView";
-<<<<<<< HEAD
-        public const string CreateBaseAddColumnsKey = "CreateBaseAddColumnsView";
-=======
->>>>>>> 147a88c... Addded Load, Create and Displaydupadupacycki
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
@@ -52,30 +42,20 @@ namespace ProjektTechniki.ViewModel
             SetupNavigation();
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<CreateTableViewModel>();
             SimpleIoc.Default.Register<CreateBaseViewModel>();
             SimpleIoc.Default.Register<LoadBaseViewModel>();
             SimpleIoc.Default.Register<ActionLoadedBaseViewModel>();
-<<<<<<< HEAD
-            SimpleIoc.Default.Register<AddRecordViewModel>();
-            SimpleIoc.Default.Register<CreateBaseAddColumnsViewModel>();
-=======
->>>>>>> 147a88c... Addded Load, Create and Displaydupadupacycki
 
 
         }
-
         private static void SetupNavigation()
         {
             var navigationService = new MyNavigationService();
+            navigationService.Configure("CreateTableView", new Uri("../View/CreateTableView.xaml", UriKind.Relative));
             navigationService.Configure("CreateBaseView", new Uri("../View/CreateBaseView.xaml", UriKind.Relative));
             navigationService.Configure("LoadBaseView", new Uri("../View/LoadBaseView.xaml", UriKind.Relative));
-<<<<<<< HEAD
-            navigationService.Configure("CreateBaseAddColumnsView", new Uri("../View/CreateBaseAddColumnsView.xaml", UriKind.Relative));
-=======
->>>>>>> 147a88c... Addded Load, Create and Displaydupadupacycki
             SimpleIoc.Default.Register<IMyNavigationService>(() => navigationService);
-            // ten kontener IoC moze przechowywac rozne serwisy, do ktorych sie mozesz odwolywac w ViewModelach.
-            //oo no dobra wazne info
         }
 
 
@@ -112,28 +92,7 @@ namespace ProjektTechniki.ViewModel
                 return ServiceLocator.Current.GetInstance<ActionLoadedBaseViewModel>();
             }
         }
-<<<<<<< HEAD
-
-
-        public AddRecordViewModel AddRecord
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<AddRecordViewModel>();
-            }
-        }
-
-        public CreateBaseAddColumnsViewModel AddColumns
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<CreateBaseAddColumnsViewModel>();
-            }
-        }
-
-=======
         
->>>>>>> 147a88c... Addded Load, Create and Displaydupadupacycki
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
