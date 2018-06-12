@@ -41,8 +41,12 @@ namespace ProjektTechniki.ViewModel
                     //TODO: filters
                 };
                 dialog.DefaultExt = ".xls";
+<<<<<<< HEAD
+                dialog.Filter = "Excel file (*.xls)|*.xls|Excel file (*.xlsx)|*.xlsx|Excel files (*.xls;*.xlsx)|*.xls;*.xlsx";
+=======
                 dialog.Filter = "Excel files (*.xls)|*.xls";
 
+>>>>>>> 147a88c... Addded Load, Create and Displaydupadupacycki
                 if (dialog.ShowDialog() == true)
                 {
                     BaseName = dialog.FileName;
