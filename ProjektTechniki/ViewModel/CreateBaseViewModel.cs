@@ -54,7 +54,6 @@ namespace ProjektTechniki.ViewModel
         {
             CreateBaseCommand = new RelayCommand(() =>
             {
-<<<<<<< HEAD
                 if (PathName == null)
                 {
                     MessageBoxResult result = MessageBox.Show("Wybierz odpowiednią sciężkę",
@@ -84,13 +83,6 @@ namespace ProjektTechniki.ViewModel
                     stream.Close();
                     navigationService.NavigateTo(ViewModelLocator.CreateBaseAddColumnsKey,file);
                 }
-=======
-                string file = $"D:\\{BaseName}.xls";
-                Workbook workbook = new Workbook();
-                Worksheet worksheet = new Worksheet("First Sheet");
-                workbook.Worksheets.Add(worksheet);
-                workbook.Save(file);
->>>>>>> 147a88c... Addded Load, Create and Displaydupadupacycki
             });
         }
 

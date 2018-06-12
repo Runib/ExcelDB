@@ -105,34 +105,21 @@
     <Compile Include="Services\IMyNavigationService.cs" />
     <Compile Include="Services\MyNavigationService.cs" />
     <Compile Include="ViewModel\ActionLoadedBaseViewModel.cs" />
-<<<<<<< HEAD
     <Compile Include="ViewModel\AddRecordViewModel.cs" />
     <Compile Include="ViewModel\CreateBaseAddColumnsViewModel.cs" />
     <Compile Include="ViewModel\CreateBaseViewModel.cs" />
-=======
-    <Compile Include="ViewModel\CreateBaseViewModel.cs" />
     <Compile Include="ViewModel\CreateTableViewModel.cs" />
->>>>>>> 147a88c... Addded Load, Create and Displaydupadupacycki
     <Compile Include="ViewModel\LoadBaseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\ActionLoadedBaseView.xaml.cs">
       <DependentUpon>ActionLoadedBaseView.xaml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="View\AddRecordView.xaml.cs">
       <DependentUpon>AddRecordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CreateBaseAddColumnsView.xaml.cs">
       <DependentUpon>CreateBaseAddColumnsView.xaml</DependentUpon>
-    </Compile>
-=======
->>>>>>> 147a88c... Addded Load, Create and Displaydupadupacycki
-    <Compile Include="View\CreateBaseView.xaml.cs">
-      <DependentUpon>CreateBaseView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\LoadBaseView.xaml.cs">
-      <DependentUpon>LoadBaseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoadBaseView.xaml.cs">
       <DependentUpon>LoadBaseView.xaml</DependentUpon>
@@ -153,7 +140,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-<<<<<<< HEAD
     <Page Include="View\AddRecordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,13 +148,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-=======
->>>>>>> 147a88c... Addded Load, Create and Displaydupadupacycki
     <Page Include="View\CreateBaseView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\LoadBaseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
