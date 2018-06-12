@@ -1,0 +1,30 @@
+﻿<Window x:Class="ProjektTechniki.View.AddRecordView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+        xmlns:local="clr-namespace:ProjektTechniki"
+        mc:Ignorable="d"
+        Title="AddRecordView" Height="200" Width="1000"
+        DataContext="{Binding AddRecord,Source={StaticResource Locator}}">
+    <Grid>
+        <DataGrid ItemsSource="{Binding ColumnsName}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Margin="0 0 0 30" x:Name="AddRecord"  CanUserResizeColumns="False" IsReadOnly="False"
+                 ColumnWidth="*" CanUserAddRows="True" AutoGenerateColumns="True" CanUserSortColumns="False" IsEnabled="True">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="CellEditEnding">
+                    <cmd:EventToCommand Command="{Binding RowEditEndingCommand}" PassEventArgsToCommand="True"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </DataGrid>
+        <Button Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 100 40">
+            Zatwierdź
+        </Button>
+    </Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="OnLoad">
+            <cmd:EventToCommand Command="{Binding OnLoad}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+</Window>
