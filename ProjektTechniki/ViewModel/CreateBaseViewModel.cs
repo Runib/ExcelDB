@@ -8,13 +8,17 @@ using ProjektTechniki.Services;
 using System.Data;
 using ExcelLibrary.SpreadSheet;
 using GalaSoft.MvvmLight;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using System.IO;
+using System.Windows;
 
 namespace ProjektTechniki.ViewModel
 {
     public class CreateBaseViewModel : ViewModelBase
     {
         private IMyNavigationService navigationService;
-        DataSet ds = new DataSet("New_DataSet");
         public RelayCommand CreateBaseCommand { get; set; }
 
         private string baseName;
@@ -23,6 +27,22 @@ namespace ProjektTechniki.ViewModel
             get { return baseName; }
             set { baseName = value; RaisePropertyChanged(() => BaseName); }
         }
+
+        private string tableName;
+        public string TableName
+        {
+            get { return tableName; }
+            set { tableName = value; RaisePropertyChanged(() => TableName); }
+        }
+
+        private string pathName;
+        public string PathName
+        {
+            get { return pathName; }
+            set { pathName = value; RaisePropertyChanged(() => PathName); }
+        }
+
+        public CreateBaseViewModel DataContext { get; private set; }
 
         public CreateBaseViewModel(IMyNavigationService navService)
         {
@@ -34,11 +54,43 @@ namespace ProjektTechniki.ViewModel
         {
             CreateBaseCommand = new RelayCommand(() =>
             {
+<<<<<<< HEAD
+                if (PathName == null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Wybierz odpowiednią sciężkę",
+                        "Confirmation", MessageBoxButton.OK);
+                }
+                else if (BaseName.FirstOrDefault() >= '0' && BaseName.FirstOrDefault() <= '9')
+                {
+                    MessageBoxResult result = MessageBox.Show("Nazwa nie powinna zaczynać się cyfrą\n" +
+                        "lub być liczbą",
+                        "Confirmation", MessageBoxButton.OK);
+                    BaseName = "";
+                }
+                else if (TableName.FirstOrDefault() >= '0' && TableName.FirstOrDefault() <= '9')
+                {
+                    MessageBoxResult result = MessageBox.Show("Nazwa nie powinna zaczynać się cyfrą\n" +
+                        "lub być liczbą",
+                        "Confirmation", MessageBoxButton.OK);
+                    TableName = "";
+                }
+                else
+                {
+                    string file = $"D:\\{BaseName}.{PathName}";
+                    var stream = new FileStream(file, FileMode.Create, FileAccess.Write);
+                    XSSFWorkbook workbook = new XSSFWorkbook();
+                    XSSFSheet sheet = (XSSFSheet)workbook.CreateSheet($"{TableName}");
+                    workbook.Write(stream);
+                    stream.Close();
+                    navigationService.NavigateTo(ViewModelLocator.CreateBaseAddColumnsKey,file);
+                }
+=======
                 string file = $"D:\\{BaseName}.xls";
                 Workbook workbook = new Workbook();
                 Worksheet worksheet = new Worksheet("First Sheet");
                 workbook.Worksheets.Add(worksheet);
                 workbook.Save(file);
+>>>>>>> 147a88c... Addded Load, Create and Displaydupadupacycki
             });
         }
 

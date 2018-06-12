@@ -1,4 +1,50 @@
 ﻿<Window x:Class="ProjektTechniki.View.ActionLoadedBase"
+<<<<<<< HEAD
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
+        xmlns:local="clr-namespace:ProjektTechniki"
+        mc:Ignorable="d"
+        Title="ActionLoadedBase" Height="600" Width="1000"
+        DataContext="{Binding ActionLoadedBase,Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="490*"/>
+            <ColumnDefinition Width="503*"/>
+        </Grid.ColumnDefinitions>
+        <Button Name="AddRecord" Width="100" Height="30" HorizontalAlignment="Left" 
+                Command="{Binding AddRecordCommand}" VerticalAlignment="Top" Margin="150 30 0 0">
+            Dodaj
+        </Button>
+        <Button Name="SerachRecord" Width="100" Height="30" HorizontalAlignment="Left"
+                Command="{Binding SerachRecordCommand}" VerticalAlignment="Top" Margin="350 30 0 0">
+            Wyszukaj
+        </Button>
+        <Button Name="SortRecords" Width="100" Height="30" HorizontalAlignment="Left" 
+                Command="{Binding SortRecordsCommand}" VerticalAlignment="Top" Margin="60.5,30,0,0" Grid.Column="1">
+            Sortuj
+        </Button>
+        <Button Name="DeleteRecord" Width="100" Height="30" HorizontalAlignment="Right" 
+                Command="{Binding DeleteRecordCommand}" VerticalAlignment="Top" Margin="0 30 150 0" Grid.Column="1">
+            Usuń
+        </Button>
+        <ComboBox Height="25" Width="150" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="421,80,421,0" Grid.ColumnSpan="2">
+
+        </ComboBox>
+        <DataGrid Margin="0 130 0 0" x:Name="LoadedData" ItemsSource="{Binding Table}" CanUserResizeColumns="False" 
+                 ColumnWidth="*" CanUserAddRows="False" AutoGenerateColumns="True" CanUserSortColumns="False" Grid.ColumnSpan="2"/>
+
+
+    </Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="OnLoad">
+            <cmd:EventToCommand Command="{Binding OnLoad}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+=======
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,4 +58,5 @@
                  ColumnWidth="*" CanUserAddRows="False" AutoGenerateColumns="True"  />
 
     </Grid>
+>>>>>>> 147a88c... Addded Load, Create and Displaydupadupacycki
 </Window>
