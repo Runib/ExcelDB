@@ -18,6 +18,7 @@ namespace ProjektTechniki.ViewModel
     {
         private List<string[]> RowsList = new List<string[]>();
 
+        public RelayCommand AddRecordCommand { get; set; }
         private DataTable table;
         public DataTable Table
         {
@@ -65,12 +66,14 @@ namespace ProjektTechniki.ViewModel
                else
                    RowsList[index][args.Column.DisplayIndex] = item;
            });
+
+            AddRecordCommand = new RelayCommand(() => {
+                
+            });
         }
 
         private void Init()
         {
-
-
             Table = new DataTable();
             Table = (DataTable)ViewModelLocator.ColumnsName;
             ColumnsName = new DataTable();

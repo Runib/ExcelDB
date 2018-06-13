@@ -56,7 +56,7 @@ namespace ProjektTechniki.ViewModel
             {
                 if (PathName == null)
                 {
-                    MessageBoxResult result = MessageBox.Show("Wybierz odpowiednią sciężkę",
+                    MessageBoxResult result = MessageBox.Show("Wybierz odpowiednie rozszerzenie",
                         "Confirmation", MessageBoxButton.OK);
                 }
                 else if (BaseName.FirstOrDefault() >= '0' && BaseName.FirstOrDefault() <= '9')
@@ -73,6 +73,16 @@ namespace ProjektTechniki.ViewModel
                         "Confirmation", MessageBoxButton.OK);
                     TableName = "";
                 }
+                else if (BaseName == null || BaseName == "")
+                {
+                    MessageBoxResult result = MessageBox.Show("Podaj nazwę bazy",
+                        "Confirmation", MessageBoxButton.OK);
+                }
+                else if (TableName == null || TableName == "")
+                {
+                    MessageBoxResult result = MessageBox.Show("Podaj nazwę arkusza",
+                        "Confirmation", MessageBoxButton.OK);
+                }
                 else
                 {
                     string file = $"D:\\{BaseName}.{PathName}";
@@ -81,7 +91,7 @@ namespace ProjektTechniki.ViewModel
                     XSSFSheet sheet = (XSSFSheet)workbook.CreateSheet($"{TableName}");
                     workbook.Write(stream);
                     stream.Close();
-                    navigationService.NavigateTo(ViewModelLocator.CreateBaseAddColumnsKey,file);
+                    navigationService.NavigateTo(ViewModelLocator.CreateBaseAddColumnsKey, file);
                 }
             });
         }

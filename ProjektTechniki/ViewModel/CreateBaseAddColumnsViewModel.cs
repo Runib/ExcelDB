@@ -19,6 +19,7 @@ namespace ProjektTechniki.ViewModel
     public class CreateBaseAddColumnsViewModel :ViewModelBase
     {
         private IMyNavigationService navigationService;
+        int add = 0;
 
         public RelayCommand AddColumnCommand { get; set; }
         public RelayCommand GoNextCommand { get; set; }
@@ -49,33 +50,54 @@ namespace ProjektTechniki.ViewModel
         {
             this.navigationService = navService;
             Dt = new DataTable();
+            add = 1;
             InitCommand();
         }
-        // jest git, bo nic nie wywala, teraz fun, no ok, baw sie dobrze dalej XD
-        //te serwisy, w sumie to jeden serwis, on jest wstrzykiwany w konstruktorze przez cos takiego jak IoC, i to jest tu...
+        
 
         private void InitCommand()
         {
-            AddColumnCommand = new RelayCommand(()=>
+            AddColumnCommand = new RelayCommand(() =>
             {
-                if (ColumnName == null || ColumnName.FirstOrDefault() >= '0' && ColumnName.FirstOrDefault() <= '9')
+                
+                if (ColumnName == null || ColumnName.FirstOrDefault() >= '0' && ColumnName.FirstOrDefault() <= '9' || ColumnName=="")
                 {
+
                     MessageBoxResult result = MessageBox.Show("Podaj prawidłową nazwę",
                         "Confirmation", MessageBoxButton.OK);
                     AddOrNot = "";
                 }
                 else
                 {
-                    Dt.Columns.Add(ColumnName);
-                    ColumnName = "";
-                    AddOrNot = "Dodano";
+                    for (int indexName = 0; indexName < Dt.Columns.Count; indexName++)
+                    {
+                        if (ColumnName == Dt.Columns[indexName].ToString())
+                        {
+                            add = 0;
+                            break;
+                        }
+                        else
+                            add = 1;
+                    }
+                    if (add == 0)
+                    {
+                        MessageBoxResult result = MessageBox.Show("Taka kolumna juz istnieje",
+                        "Confirmation", MessageBoxButton.OK);
+                        ColumnName = "";
+                        AddOrNot = "";
+                    }
+                    else if (add == 1)
+                    {
+                        Dt.Columns.Add(ColumnName);
+                        ColumnName = "";
+                        AddOrNot = "Dodano";
+                    }
                 }
             });
 
             GoNextCommand = new RelayCommand(() =>
             {
                 string path = navigationService.Parameter.ToString();
-                var fileExtension = Path.GetExtension(path);
                 FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read);
                 IWorkbook woorkbook = new XSSFWorkbook(stream);
                 stream.Close();

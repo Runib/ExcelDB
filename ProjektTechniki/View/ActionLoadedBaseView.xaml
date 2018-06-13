@@ -30,10 +30,11 @@
                 Command="{Binding DeleteRecordCommand}" VerticalAlignment="Top" Margin="0 30 150 0" Grid.Column="1">
             Usuń
         </Button>
-        <ComboBox Height="25" Width="150" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="421,80,421,0" Grid.ColumnSpan="2">
+        <ComboBox Height="25" Width="150" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="421,80,421,0"
+                  Grid.ColumnSpan="2" ItemsSource="{Binding TablesName}" SelectedItem="{Binding SelectedName}">
 
         </ComboBox>
-        <DataGrid Margin="0 130 0 0" x:Name="LoadedData" ItemsSource="{Binding Table}" CanUserResizeColumns="False" 
+        <DataGrid Margin="0 130 0 0" x:Name="LoadedData" ItemsSource="{Binding Table, Mode=TwoWay}" CanUserResizeColumns="False" 
                  ColumnWidth="*" CanUserAddRows="False" AutoGenerateColumns="True" CanUserSortColumns="False" Grid.ColumnSpan="2"/>
 
 

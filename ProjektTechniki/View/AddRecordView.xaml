@@ -18,7 +18,8 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </DataGrid>
-        <Button Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 100 40">
+        <Button Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 100 40"
+                Command="{Binding AddRecordCommand}">
             Zatwierdź
         </Button>
     </Grid>

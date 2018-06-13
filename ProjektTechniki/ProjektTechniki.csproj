@@ -102,13 +102,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Services\ExcelHelper.cs" />
     <Compile Include="Services\IMyNavigationService.cs" />
     <Compile Include="Services\MyNavigationService.cs" />
     <Compile Include="ViewModel\ActionLoadedBaseViewModel.cs" />
     <Compile Include="ViewModel\AddRecordViewModel.cs" />
     <Compile Include="ViewModel\CreateBaseAddColumnsViewModel.cs" />
     <Compile Include="ViewModel\CreateBaseViewModel.cs" />
-    <Compile Include="ViewModel\CreateTableViewModel.cs" />
     <Compile Include="ViewModel\LoadBaseViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 
 namespace ProjektTechniki.ViewModel
 {
@@ -17,49 +18,34 @@ namespace ProjektTechniki.ViewModel
     {
         public RelayCommand AddRecordCommand { get; set; }
 
+        List<ISheet> sheets = new List<ISheet>();
+
         private DataTable table;
         public DataTable Table
         {
             get { return table; }
             set { table = value; RaisePropertyChanged(() => Table); }
         }
-
-        public ActionLoadedBaseViewModel()
+        private List<string> tablesName;
+        public List<string> TablesName
         {
-            Init();
-            InitCommand();
+            get { return tablesName; }
+            set { tablesName = value; RaisePropertyChanged(() => TablesName); }
         }
 
-        private void Init()
+        private string selectedName;
+        public string SelectedName
         {
-            string sheetName;
-            dynamic workbook;
-            ISheet sheet = null;
-            var param = ViewModelLocator.Param as String;
-            var fileExtension = Path.GetExtension(param);
-            switch (fileExtension)
-            {
-                case ".xlsx":
-                    using (var stream = new FileStream(param, FileMode.Open, FileAccess.Read))
-                    {
-                        workbook = new XSSFWorkbook(stream);
-                        sheetName = workbook.GetSheetAt(0).SheetName;
-                        sheet = (XSSFSheet)workbook.GetSheet(sheetName);
-                        break;
-                    }
-                case ".xls":
-                    using (var stream = new FileStream(param, FileMode.Open, FileAccess.Read))
-                    {
-                        workbook = new XSSFWorkbook(stream);
-                        sheetName = workbook.GetSheetAt(0).SheetName;
-                        sheet = (XSSFSheet)workbook.GetSheet(sheetName);
-                        break;
-                    }
-            }
+            get { return selectedName; }
+            set { selectedName = value; RaisePropertyChanged(() => SelectedName); ChangeTable(); }
+        }
 
-            Table = new DataTable();
+        private void ChangeTable()
+        {
+            ISheet sheet;
+            var tempTable = new DataTable();
             var list = new List<object>();
-
+            sheet = sheets.Where(s=>s.SheetName==SelectedName).SingleOrDefault();
             for (int rowIndex = 0; rowIndex <= sheet.LastRowNum; rowIndex++)
             {
                 XSSFRow row = (XSSFRow)sheet.GetRow(rowIndex);
@@ -67,7 +53,7 @@ namespace ProjektTechniki.ViewModel
                 {
                     if (rowIndex == sheet.FirstRowNum)
                     {
-                        Table.Columns.Add((row.GetCell(colIndex).StringCellValue.ToString()));
+                        tempTable.Columns.Add((row.GetCell(colIndex).StringCellValue.ToString()));
 
                     }
                     else
@@ -76,11 +62,46 @@ namespace ProjektTechniki.ViewModel
 
                 if (list.Count > 0)
                 {
-                    Table.Rows.Add(list.ToArray());
+                    tempTable.Rows.Add(list.ToArray());
                     list.Clear();
                 }
             }
+            Table = tempTable;
+        }
 
+        public ActionLoadedBaseViewModel()
+        {
+
+            Init();
+            InitCommand();
+        }
+
+        private void Init()
+        {
+            IWorkbook workbook = new XSSFWorkbook();
+            string sheetName=null;
+            ISheet sheet = null;
+            TablesName = new List<string>();
+            var param = ViewModelLocator.Param as String;
+            
+            int indexSheet = 0;
+            using (var stream = new FileStream(param, FileMode.Open, FileAccess.Read))
+            {
+                workbook = new XSSFWorkbook(stream);
+                while (indexSheet<workbook.NumberOfSheets) 
+                {
+                    sheetName = workbook.GetSheetAt(indexSheet).SheetName;
+                    sheet = (XSSFSheet)workbook.GetSheet(sheetName);
+                    if (sheet.GetRow(0) != null)
+                    {
+                        sheets.Add(sheet);
+                        TablesName.Add(sheetName);
+                    }
+                    indexSheet++;
+                    sheet = null;
+                    sheetName = null;
+                }
+            }
         }
 
         private void InitCommand()
