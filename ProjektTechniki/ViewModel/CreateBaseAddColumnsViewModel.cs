@@ -110,7 +110,6 @@ namespace ProjektTechniki.ViewModel
                 {
                     var cell = row.CreateCell(j);
                     cell.SetCellValue(Dt.Columns[j].ToString());
-                    sheet.AutoSizeColumn(j);
                 }
 
 

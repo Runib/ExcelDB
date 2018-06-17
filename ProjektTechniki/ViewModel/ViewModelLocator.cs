@@ -28,6 +28,7 @@ namespace ProjektTechniki.ViewModel
     {
         public static object Param;
         public static object ColumnsName;
+        public static string sheetName;
 
         
         public const string CreateTableKey = "CreateTableView";
@@ -35,6 +36,7 @@ namespace ProjektTechniki.ViewModel
         public const string CreateBaseKey = "CreateBaseView";
         public const string LoadBaseKey = "LoadBaseView";
         public const string CreateBaseAddColumnsKey = "CreateBaseAddColumnsView";
+        public const string SortRecordsKey = "SortRecordsView";
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
@@ -50,6 +52,7 @@ namespace ProjektTechniki.ViewModel
             SimpleIoc.Default.Register<LoadBaseViewModel>();
             SimpleIoc.Default.Register<ActionLoadedBaseViewModel>();
             SimpleIoc.Default.Register<AddRecordViewModel>();
+            SimpleIoc.Default.Register<SortRecordsViewModel>();
             SimpleIoc.Default.Register<CreateBaseAddColumnsViewModel>();
         }
 
@@ -83,6 +86,22 @@ namespace ProjektTechniki.ViewModel
             }
         }
 
+        public DeleteRecordViewModel DeleteRecord
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<DeleteRecordViewModel>();
+            }
+        }
+
+        public SearchRecordViewModel SearchRecord
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SearchRecordViewModel>();
+            }
+        }
+
         public LoadBaseViewModel LoadBase
         {
             get
@@ -104,6 +123,14 @@ namespace ProjektTechniki.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<AddRecordViewModel>();
+            }
+        }
+
+        public SortRecordsViewModel SortRecords
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<SortRecordsViewModel>();
             }
         }
 

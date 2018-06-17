@@ -59,6 +59,16 @@ namespace ProjektTechniki.ViewModel
                     MessageBoxResult result = MessageBox.Show("Wybierz odpowiednie rozszerzenie",
                         "Confirmation", MessageBoxButton.OK);
                 }
+                else if (BaseName == null || BaseName == "")
+                {
+                    MessageBoxResult result = MessageBox.Show("Podaj nazwę bazy",
+                        "Confirmation", MessageBoxButton.OK);
+                }
+                else if (TableName == null || TableName == "")
+                {
+                    MessageBoxResult result = MessageBox.Show("Podaj nazwę arkusza",
+                        "Confirmation", MessageBoxButton.OK);
+                }
                 else if (BaseName.FirstOrDefault() >= '0' && BaseName.FirstOrDefault() <= '9')
                 {
                     MessageBoxResult result = MessageBox.Show("Nazwa nie powinna zaczynać się cyfrą\n" +
@@ -73,23 +83,13 @@ namespace ProjektTechniki.ViewModel
                         "Confirmation", MessageBoxButton.OK);
                     TableName = "";
                 }
-                else if (BaseName == null || BaseName == "")
-                {
-                    MessageBoxResult result = MessageBox.Show("Podaj nazwę bazy",
-                        "Confirmation", MessageBoxButton.OK);
-                }
-                else if (TableName == null || TableName == "")
-                {
-                    MessageBoxResult result = MessageBox.Show("Podaj nazwę arkusza",
-                        "Confirmation", MessageBoxButton.OK);
-                }
                 else
                 {
                     string file = $"D:\\{BaseName}.{PathName}";
                     var stream = new FileStream(file, FileMode.Create, FileAccess.Write);
-                    XSSFWorkbook workbook = new XSSFWorkbook();
-                    XSSFSheet sheet = (XSSFSheet)workbook.CreateSheet($"{TableName}");
-                    workbook.Write(stream);
+                    //XSSFWorkbook workbook = new XSSFWorkbook();
+                    XSSFSheet sheet = (XSSFSheet)(App.workbook.CreateSheet($"{TableName}"));
+                    App.workbook.Write(stream);
                     stream.Close();
                     navigationService.NavigateTo(ViewModelLocator.CreateBaseAddColumnsKey, file);
                 }

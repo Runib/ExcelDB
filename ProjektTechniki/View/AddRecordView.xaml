@@ -8,6 +8,7 @@
         xmlns:local="clr-namespace:ProjektTechniki"
         mc:Ignorable="d"
         Title="AddRecordView" Height="200" Width="1000"
+        x:Name="window"
         DataContext="{Binding AddRecord,Source={StaticResource Locator}}">
     <Grid>
         <DataGrid ItemsSource="{Binding ColumnsName}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Margin="0 0 0 30" x:Name="AddRecord"  CanUserResizeColumns="False" IsReadOnly="False"
@@ -19,7 +20,7 @@
             </i:Interaction.Triggers>
         </DataGrid>
         <Button Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 100 40"
-                Command="{Binding AddRecordCommand}">
+                Command="{Binding AddRecordCommand}" CommandParameter="{Binding ElementName=window}">
             Zatwierdź
         </Button>
     </Grid>

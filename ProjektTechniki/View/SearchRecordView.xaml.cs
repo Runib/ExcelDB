@@ -15,14 +15,13 @@ using System.Windows.Shapes;
 namespace ProjektTechniki.View
 {
     /// <summary>
-    /// Logika interakcji dla klasy ActionLoadedBase.xaml
+    /// Logika interakcji dla klasy SearchRecordView.xaml
     /// </summary>
-    public partial class ActionLoadedBase : Window
+    public partial class SearchRecordView : Window
     {
-        public ActionLoadedBase()
+        public SearchRecordView()
         {
             InitializeComponent();
         }
-        
     }
 }

@@ -8,15 +8,19 @@ using ProjektTechniki.Services;
 using ProjektTechniki.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Windows;
 
 namespace ProjektTechniki.ViewModel
 {
     public class ActionLoadedBaseViewModel : ViewModelBase
     {
         public RelayCommand AddRecordCommand { get; set; }
+        public RelayCommand OnLoad{ get; set; }
+        public RelayCommand SortRecordsCommand { get; set; }
 
         List<ISheet> sheets = new List<ISheet>();
 
@@ -26,18 +30,18 @@ namespace ProjektTechniki.ViewModel
             get { return table; }
             set { table = value; RaisePropertyChanged(() => Table); }
         }
-        private List<string> tablesName;
-        public List<string> TablesName
+        
+        public ObservableCollection<string> TablesName
         {
-            get { return tablesName; }
-            set { tablesName = value; RaisePropertyChanged(() => TablesName); }
+            get;
+            set; 
         }
 
         private string selectedName;
         public string SelectedName
         {
             get { return selectedName; }
-            set { selectedName = value; RaisePropertyChanged(() => SelectedName); ChangeTable(); }
+            set { selectedName = value; RaisePropertyChanged(() => SelectedName); if(!string.IsNullOrEmpty(value))ChangeTable(); }
         }
 
         private void ChangeTable()
@@ -46,6 +50,7 @@ namespace ProjektTechniki.ViewModel
             var tempTable = new DataTable();
             var list = new List<object>();
             sheet = sheets.Where(s=>s.SheetName==SelectedName).SingleOrDefault();
+            ViewModelLocator.sheetName = sheet.SheetName;
             for (int rowIndex = 0; rowIndex <= sheet.LastRowNum; rowIndex++)
             {
                 XSSFRow row = (XSSFRow)sheet.GetRow(rowIndex);
@@ -54,7 +59,6 @@ namespace ProjektTechniki.ViewModel
                     if (rowIndex == sheet.FirstRowNum)
                     {
                         tempTable.Columns.Add((row.GetCell(colIndex).StringCellValue.ToString()));
-
                     }
                     else
                         list.Add(row.GetCell(colIndex));
@@ -71,27 +75,26 @@ namespace ProjektTechniki.ViewModel
 
         public ActionLoadedBaseViewModel()
         {
-
-            Init();
+            TablesName = new ObservableCollection<string>();
             InitCommand();
         }
 
         private void Init()
         {
-            IWorkbook workbook = new XSSFWorkbook();
+            TablesName.Clear();
+            sheets = new List<ISheet>();
             string sheetName=null;
             ISheet sheet = null;
-            TablesName = new List<string>();
             var param = ViewModelLocator.Param as String;
             
             int indexSheet = 0;
             using (var stream = new FileStream(param, FileMode.Open, FileAccess.Read))
             {
-                workbook = new XSSFWorkbook(stream);
-                while (indexSheet<workbook.NumberOfSheets) 
+                App.workbook = new XSSFWorkbook(stream);
+                while (indexSheet<App.workbook.NumberOfSheets) 
                 {
-                    sheetName = workbook.GetSheetAt(indexSheet).SheetName;
-                    sheet = (XSSFSheet)workbook.GetSheet(sheetName);
+                    sheetName = App.workbook.GetSheetAt(indexSheet).SheetName;
+                    sheet = (XSSFSheet)(App.workbook.GetSheet(sheetName));
                     if (sheet.GetRow(0) != null)
                     {
                         sheets.Add(sheet);
@@ -101,6 +104,11 @@ namespace ProjektTechniki.ViewModel
                     sheet = null;
                     sheetName = null;
                 }
+
+                if (TablesName.Count==0)
+                {
+
+                }
             }
         }
 
@@ -108,9 +116,36 @@ namespace ProjektTechniki.ViewModel
         {
             AddRecordCommand = new RelayCommand(() =>
             {
-                ViewModelLocator.ColumnsName = Table;
-                AddRecordView ActionWindow = new AddRecordView();
-                ActionWindow.ShowDialog();
+                if (!string.IsNullOrEmpty(SelectedName))
+                {
+                    ViewModelLocator.ColumnsName = Table;
+                    AddRecordView ActionWindow = new AddRecordView();
+                    ActionWindow.ShowDialog();
+                    Init();
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("Brak dostepu",
+                            "Confirmation", MessageBoxButton.OK);
+                }
+                
+            });
+            OnLoad = new RelayCommand(() => {
+                Init();
+            });
+            SortRecordsCommand = new RelayCommand(() =>
+            {
+                if (!string.IsNullOrEmpty(SelectedName))
+                {
+                    ViewModelLocator.ColumnsName = Table;
+                    SortRecordsView ActionWindow = new SortRecordsView();
+                    ActionWindow.ShowDialog();
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("Brak dostepu",
+                            "Confirmation", MessageBoxButton.OK);
+                }
             });
         }
     }

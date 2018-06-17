@@ -19,7 +19,7 @@
             Dodaj
         </Button>
         <Button Name="SerachRecord" Width="100" Height="30" HorizontalAlignment="Left"
-                Command="{Binding SerachRecordCommand}" VerticalAlignment="Top" Margin="350 30 0 0">
+                Command="{Binding SearchRecordCommand}" VerticalAlignment="Top" Margin="350 30 0 0">
             Wyszukaj
         </Button>
         <Button Name="SortRecords" Width="100" Height="30" HorizontalAlignment="Left" 
@@ -40,7 +40,7 @@
 
     </Grid>
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="OnLoad">
+        <i:EventTrigger EventName="Loaded">
             <cmd:EventToCommand Command="{Binding OnLoad}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>

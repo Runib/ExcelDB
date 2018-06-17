@@ -1,14 +1,17 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using NPOI.SS.UserModel;
 using ProjektTechniki.Services;
 using ProjektTechniki.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -18,7 +21,9 @@ namespace ProjektTechniki.ViewModel
     {
         private List<string[]> RowsList = new List<string[]>();
 
-        public RelayCommand AddRecordCommand { get; set; }
+        public RelayCommand<object> AddRecordCommand { get; set; }
+        public RelayCommand<object> RowEditEndingCommand { get; set; }
+
         private DataTable table;
         public DataTable Table
         {
@@ -40,7 +45,7 @@ namespace ProjektTechniki.ViewModel
             set { selectedItem = value; RaisePropertyChanged(() => SelectedItem); }
         }
 
-        public RelayCommand<object> RowEditEndingCommand { get; set; }
+       
 
         public AddRecordViewModel()
         {
@@ -57,18 +62,56 @@ namespace ProjektTechniki.ViewModel
                var index = row.GetIndex();
                var item = ((TextBox)args.EditingElement).Text;
 
-               if (index > RowsList.Count - 1)
+               if (index > RowsList.Count - 1 && RowsList!=null)
                {
                    var arr = new string[ColumnsName.Columns.Count];
                    arr[args.Column.DisplayIndex] = item;
                    RowsList.Add(arr);
                }
-               else
+               else if(RowsList!=null)
                    RowsList[index][args.Column.DisplayIndex] = item;
+
            });
 
-            AddRecordCommand = new RelayCommand(() => {
-                
+            AddRecordCommand = new RelayCommand<object>(w => {
+                ISheet sheet;
+                int AddOrNot = 1;
+                sheet=App.workbook.GetSheet(ViewModelLocator.sheetName);
+                for (int i = 0; i < RowsList.Count; i++)
+                {
+                    for (int j = 0; j < RowsList[i].Length; j++)
+                    {
+                        if(RowsList[i][j]==null || RowsList[i][j]=="")
+                        {
+                            AddOrNot = 0;
+                            break;
+                        }
+                    }
+                }
+                if (AddOrNot == 1)
+                {
+                    for (int i = 0; i < RowsList.Count; i++)
+                    {
+                        IRow row = sheet.CreateRow(sheet.LastRowNum +1);
+                        for (int j = 0; j < RowsList[i].Length; j++)
+                        {
+                            var cell = row.CreateCell(j);
+                            cell.SetCellValue(RowsList[i][j]);
+                        }
+                    }
+                    RowsList.Clear();
+                    Init();
+                    var param = ViewModelLocator.Param as String;
+                    var stream = new FileStream(param, FileMode.Open, FileAccess.ReadWrite);
+                    App.workbook.Write(stream);
+                    stream.Close();
+                    ((Window)w).Close();
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("Wypełnij cały wiersz.",
+                            "Confirmation", MessageBoxButton.OK);
+                }
             });
         }
 

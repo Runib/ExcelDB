@@ -1,4 +1,6 @@
-﻿using ProjektTechniki.ViewModel;
+﻿using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using ProjektTechniki.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,5 +16,6 @@ namespace ProjektTechniki
     /// </summary>
     public partial class App : Application
     {
+        public static IWorkbook workbook = new XSSFWorkbook();
     }
 }
