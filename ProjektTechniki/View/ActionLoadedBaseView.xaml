@@ -11,8 +11,8 @@
         DataContext="{Binding ActionLoadedBase,Source={StaticResource Locator}}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="490*"/>
-            <ColumnDefinition Width="503*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Button Name="AddRecord" Width="100" Height="30" HorizontalAlignment="Left" 
                 Command="{Binding AddRecordCommand}" VerticalAlignment="Top" Margin="150 30 0 0">
@@ -35,13 +35,24 @@
 
         </ComboBox>
         <DataGrid Margin="0 130 0 0" x:Name="LoadedData" ItemsSource="{Binding Table, Mode=TwoWay}" CanUserResizeColumns="False" 
-                 ColumnWidth="*" CanUserAddRows="False" AutoGenerateColumns="True" CanUserSortColumns="False" Grid.ColumnSpan="2"/>
+                 ColumnWidth="*" CanUserAddRows="False" AutoGenerateColumns="True" CanUserSortColumns="False" Grid.ColumnSpan="2"
+                  IsReadOnly="True" SelectedItem="{Binding SelectedRow, Mode=TwoWay}" SelectionMode="Extended" SelectionUnit="FullRow" />
 
+        <Label HorizontalAlignment="Right" VerticalAlignment="Top" Content="Timer:" Grid.Column="1" Margin="0,10,70,0"/>
+        <Label HorizontalAlignment="Right" VerticalAlignment="Top" Content="{Binding OperationTime}" ContentStringFormat="F4" Grid.Column="1" Margin="0,10,15,0"/>
+
+        <Button VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Width="40" Height="20" Margin="100 100 0 0"
+                Command="{Binding ResetCommand}">
+            Reset
+        </Button>
 
     </Grid>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <cmd:EventToCommand Command="{Binding OnLoad}"/>
+        </i:EventTrigger>
+        <i:EventTrigger EventName="Unloaded">
+            <cmd:EventToCommand Command="{Binding OnUnload}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
 </Window>

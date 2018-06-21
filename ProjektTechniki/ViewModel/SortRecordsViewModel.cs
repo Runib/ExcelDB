@@ -19,7 +19,8 @@ namespace ProjektTechniki.ViewModel
             set;
         }
 
-        public RelayCommand SortCommand { get; set; }
+        public RelayCommand<object> SortCommand { get; set; }
+        public RelayCommand OnLoad { get; set; }
 
         private DataTable table;
         public DataTable Table
@@ -42,20 +43,17 @@ namespace ProjektTechniki.ViewModel
             set { selectedName = value; RaisePropertyChanged(() => SelectedName); }
         }
 
-
-
         public SortRecordsViewModel()
         {
-            TablesName = new ObservableCollection<string>();
-            Init();
             InitCommand();
+            TablesName = new ObservableCollection<string>();
         }
 
         private void InitCommand()
         {
-            SortCommand = new RelayCommand(() =>
+            SortCommand = new RelayCommand<object>(w =>
             {
-                if (SortBy == null)
+                if (SortBy == null || SortBy=="")
                 {
                     MessageBoxResult result = MessageBox.Show("Wybierz rodzaj sortowania",
                         "Confirmation", MessageBoxButton.OK);
@@ -67,19 +65,36 @@ namespace ProjektTechniki.ViewModel
                 }
                 else
                 {
-
+                    ViewModelLocator.SortRecordsCon.Add(SelectedName);
+                    if (SortBy=="Rosnaco")
+                    {
+                        SortBy = "asc";
+                    }
+                    else if (SortBy=="Malejaco")
+                    {
+                        SortBy = "desc";
+                    }
+                    ViewModelLocator.SortRecordsCon.Add(SortBy);
+                    ((Window)w).Close();
                 }
+            });
+
+            OnLoad = new RelayCommand(() =>
+            {
+               Init();
             });
         }
 
-        private void Init()
+        public void Init()
         {
+            TablesName.Clear();
             Table = new DataTable();
             Table = (DataTable)ViewModelLocator.ColumnsName;
             for (int colIndex = 0; colIndex < Table.Columns.Count; colIndex++)
             {
                 TablesName.Add(Table.Columns[colIndex].ToString());
             }
+            
         }
     }
 }

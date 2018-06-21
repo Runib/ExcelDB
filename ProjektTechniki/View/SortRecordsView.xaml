@@ -8,6 +8,7 @@
         xmlns:local="clr-namespace:ProjektTechniki"
         mc:Ignorable="d"
         Title="SortRecordsView" Height="150" Width="350"
+        x:Name="window"
         DataContext="{Binding SortRecords,Source={StaticResource Locator}}">
     <Grid>
         <ComboBox Height="20" Width="90" HorizontalAlignment="Left" VerticalAlignment="Center" 
@@ -22,12 +23,12 @@
         </ComboBox>
 
         <Button Height="20" Width="80" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                Margin="0 0 20 20" Command="{Binding SortCommand}">
+                Margin="0 0 20 20" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=window}">
             Sortuj
         </Button>
     </Grid>
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="OnLoad">
+        <i:EventTrigger EventName="Loaded">
             <cmd:EventToCommand Command="{Binding OnLoad}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>

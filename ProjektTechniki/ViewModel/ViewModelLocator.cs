@@ -15,8 +15,10 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using NPOI.SS.UserModel;
 using ProjektTechniki.Services;
 using System;
+using System.Collections.Generic;
 
 namespace ProjektTechniki.ViewModel
 {
@@ -29,8 +31,10 @@ namespace ProjektTechniki.ViewModel
         public static object Param;
         public static object ColumnsName;
         public static string sheetName;
+        public static List<string> SortRecordsCon=new List<string>();
+        public static List<CellType> ColumnType = new List<CellType>();
+        public static List<string> SearchData = new List<string>();
 
-        
         public const string CreateTableKey = "CreateTableView";
         public const string AddRecordKey = "AddRecordView";
         public const string CreateBaseKey = "CreateBaseView";
@@ -53,6 +57,7 @@ namespace ProjektTechniki.ViewModel
             SimpleIoc.Default.Register<ActionLoadedBaseViewModel>();
             SimpleIoc.Default.Register<AddRecordViewModel>();
             SimpleIoc.Default.Register<SortRecordsViewModel>();
+            SimpleIoc.Default.Register<SearchRecordViewModel>();
             SimpleIoc.Default.Register<CreateBaseAddColumnsViewModel>();
         }
 
@@ -83,14 +88,6 @@ namespace ProjektTechniki.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<CreateBaseViewModel>();
-            }
-        }
-
-        public DeleteRecordViewModel DeleteRecord
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<DeleteRecordViewModel>();
             }
         }
 

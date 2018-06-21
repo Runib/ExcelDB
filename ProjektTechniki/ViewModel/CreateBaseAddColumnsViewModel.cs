@@ -38,6 +38,13 @@ namespace ProjektTechniki.ViewModel
             set { columnName = value; RaisePropertyChanged(() => ColumnName); }
         }
 
+        private string columnType;
+        public string ColumnType
+        {
+            get { return columnType; }
+            set { columnType = value; RaisePropertyChanged(() => ColumnType); }
+        }
+
         private DataTable dt;
         public DataTable Dt
         {
@@ -67,6 +74,11 @@ namespace ProjektTechniki.ViewModel
                         "Confirmation", MessageBoxButton.OK);
                     AddOrNot = "";
                 }
+                else if (ColumnType==null)
+                {
+                    MessageBox.Show("Wybierz typ kolumny",
+                        "Confirmation", MessageBoxButton.OK);
+                }
                 else
                 {
                     for (int indexName = 0; indexName < Dt.Columns.Count; indexName++)
@@ -89,8 +101,23 @@ namespace ProjektTechniki.ViewModel
                     else if (add == 1)
                     {
                         Dt.Columns.Add(ColumnName);
+                        CellType cellType;
+                        if (ColumnType == "String")
+                        {
+                            cellType = CellType.String;
+                        }
+                        else if (ColumnType == "Numeryczny")
+                        {
+                            cellType = CellType.Numeric;
+                        }
+                        else
+                        {
+                            cellType = CellType.Boolean;
+                        }
+                        ViewModelLocator.ColumnType.Add(cellType);
                         ColumnName = "";
                         AddOrNot = "Dodano";
+                        ColumnType = null;
                     }
                 }
             });

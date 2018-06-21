@@ -12,7 +12,7 @@
 
     <Grid Background="White">
         <TextBlock VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Height="20"
-                   FontSize="13" Margin="30 40 0 0">
+                   FontSize="13" Margin="10 40 0 0">
             Podaj nazwę kolumny:
         </TextBlock>
 
@@ -21,12 +21,19 @@
         </TextBlock>
         
         <TextBox VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Height="20"
-                   FontSize="13" Margin="0 40 20 0" Text="{Binding ColumnName}">
+                   FontSize="13" Margin="0 40 60 0" Text="{Binding ColumnName}">
             
         </TextBox>
 
+        <ComboBox Text="{Binding ColumnType, Mode=TwoWay}" Width="80" Height="20" HorizontalAlignment="Center" Margin="150 40 0 0"
+                  VerticalAlignment="Top">
+            <ComboBoxItem  Name="Numeric">Numeryczny</ComboBoxItem>
+            <ComboBoxItem  Name="String">String</ComboBoxItem>
+            <ComboBoxItem  Name="Bool">Boolean</ComboBoxItem>
+        </ComboBox>
+        
         <Button VerticalAlignment="Top" HorizontalAlignment="Center" Width="70" Height="20"
-                   FontSize="13" Margin="180 40 00 0" Command="{Binding AddColumnCommand}" >
+                   FontSize="13" Margin="320 40 00 0" Command="{Binding AddColumnCommand}" >
             Dodaj
         </Button>
 
