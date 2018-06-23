@@ -39,6 +39,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna przechowująca scięzkę do pliku
         /// </summary>
         private string baseName;
+
+        /// <summary>
+        /// Zmienna przechowująca scięzkę do pliku
+        /// </summary>
         public string BaseName
         {
             get { return baseName; }

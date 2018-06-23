@@ -41,6 +41,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna przechowująca tabelę, pomagająca przy pobraniu nazw kolumn tabeli
         /// </summary>
         private DataTable table;
+
+        /// <summary>
+        /// Zmienna przechowująca tabelę, pomagająca przy pobraniu nazw kolumn tabeli
+        /// </summary>
         public DataTable Table
         {
             get { return table; }
@@ -51,6 +55,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna przechowująca sposób sortowania
         /// </summary>
         private string sortBy;
+
+        /// <summary>
+        /// Zmienna przechowująca sposób sortowania
+        /// </summary>
         public string SortBy
         {
             get { return sortBy; }
@@ -61,6 +69,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna przechowująca wybraną nazwe kolumny którą użytkownik chce posortować
         /// </summary>
         private string selectedName;
+
+        /// <summary>
+        /// Zmienna przechowująca wybraną nazwe kolumny którą użytkownik chce posortować
+        /// </summary>
         public string SelectedName
         {
             get { return selectedName; }

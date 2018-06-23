@@ -48,6 +48,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna informująca czy dodać czy nie dodawać kolumn do pliku, sprawdza wypełnienie wszystkich pól w widoku
         /// </summary>
         private string addOrNot;
+
+        /// <summary>
+        /// Zmienna informująca czy dodać czy nie dodawać kolumn do pliku, sprawdza wypełnienie wszystkich pól w widoku
+        /// </summary>
         public string AddOrNot
         {
             get { return addOrNot; }
@@ -58,6 +62,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna połączona z TextBox w widoku, pobiera nazwę kolumny
         /// </summary>
         private string columnName;
+
+        /// <summary>
+        /// Zmienna połączona z TextBox w widoku, pobiera nazwę kolumny
+        /// </summary>
         public string ColumnName
         {
             get { return columnName; }
@@ -68,6 +76,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna połącozna z ComboBoxem w widoku, pobiera typ kolumny
         /// </summary>
         private string columnType;
+
+        /// <summary>
+        /// Zmienna połącozna z ComboBoxem w widoku, pobiera typ kolumny
+        /// </summary>
         public string ColumnType
         {
             get { return columnType; }
@@ -78,6 +90,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna Typu DaTable pozwala na dodanie nazw kolumn i przekazanie danych dalej do widoku
         /// </summary>
         private DataTable dt;
+
+        /// <summary>
+        /// Zmienna Typu DaTable pozwala na dodanie nazw kolumn i przekazanie danych dalej do widoku
+        /// </summary>
         public DataTable Dt
         {
             get { return dt; }

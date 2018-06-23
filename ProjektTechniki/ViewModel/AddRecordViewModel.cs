@@ -43,6 +43,10 @@ namespace ProjektTechniki.ViewModel
         /// Deklaracja zmiennej służącej do odpowiednie wczytania nazw kolumn
         /// </summary>
         private DataTable table;
+
+        /// <summary>
+        /// Deklaracja zmiennej służącej do odpowiednie wczytania nazw kolumn
+        /// </summary>
         public DataTable Table
         {
             get { return table; }
@@ -53,6 +57,10 @@ namespace ProjektTechniki.ViewModel
         /// Deklaracja zmiennej przechowującej nazwy kolumn
         /// </summary>
         private DataTable columnsName;
+
+        /// <summary>
+        /// Deklaracja zmiennej przechowującej nazwy kolumn
+        /// </summary>
         public DataTable ColumnsName
         {
             get { return columnsName; }
@@ -63,6 +71,10 @@ namespace ProjektTechniki.ViewModel
         /// Deklaracja zmiennej pomocnicza, pomaga przy dodawaniu wierszy do pliku
         /// </summary>
         private DataRowView selectedItem;
+
+        /// <summary>
+        /// Deklaracja zmiennej pomocnicza, pomaga przy dodawaniu wierszy do pliku
+        /// </summary>
         public DataRowView SelectedItem
         {
             get { return selectedItem; }

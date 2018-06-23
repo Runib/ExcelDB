@@ -82,6 +82,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna typu DataTable, przechowująca tabelę do wyświetlania
         /// </summary>
         private DataTable table;
+
+        /// <summary>
+        /// Zmienna typu DataTable, przechowująca tabelę do wyświetlania
+        /// </summary>
         public DataTable Table
         {
             get { return table; }
@@ -92,6 +96,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna przechowująca wybrany wiersz do usunięcia
         /// </summary>
         private DataRowView selectedRow;
+
+        /// <summary>
+        /// Zmienna przechowująca wybrany wiersz do usunięcia
+        /// </summary>
         public DataRowView SelectedRow
         {
             get { return selectedRow; }
@@ -117,6 +125,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna przechowująca sciezkie do pliku
         /// </summary>
         private string selectedName;
+
+        /// <summary>
+        /// Zmienna przechowująca sciezkie do pliku
+        /// </summary>
         public string SelectedName
         {
             get { return selectedName; }
@@ -127,6 +139,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna pomagająca przy obliczaniu i wyświetlaniu czasu określonych działan
         /// </summary>
         private double operationTime;
+
+        /// <summary>
+        /// Zmienna pomagająca przy obliczaniu i wyświetlaniu czasu określonych działan
+        /// </summary>
         public double OperationTime
         {
             get { return operationTime; }

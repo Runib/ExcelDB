@@ -42,6 +42,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna przechowująca nazwę kolumny wybrana przez użytkownika
         /// </summary>
         private string selectedName;
+
+        /// <summary>
+        /// Zmienna przechowująca nazwę kolumny wybrana przez użytkownika
+        /// </summary>
         public string SelectedName
         {
             get { return selectedName; }
@@ -52,6 +56,11 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna przechowująca tekst wyszukiwany wpisany przez użytkownika
         /// </summary>
         private string searchText;
+
+
+        /// <summary>
+        /// Zmienna przechowująca tekst wyszukiwany wpisany przez użytkownika
+        /// </summary>
         public string SearchText
         {
             get { return searchText; }
@@ -62,6 +71,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna pomagająca pobrać nazwy kolumn
         /// </summary>
         private DataTable table;
+
+        /// <summary>
+        /// Zmienna pomagająca pobrać nazwy kolumn
+        /// </summary>
         public DataTable Table
         {
             get { return table; }

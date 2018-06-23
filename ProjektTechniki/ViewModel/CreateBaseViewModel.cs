@@ -38,6 +38,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna połącozna z polem w widoku, przechowuje nazwę bazy/pliku
         /// </summary>
         private string baseName;
+
+        /// <summary>
+        /// Zmienna połącozna z polem w widoku, przechowuje nazwę bazy/pliku
+        /// </summary>
         public string BaseName
         {
             get { return baseName; }
@@ -48,6 +52,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna połącozna z polem w widoku, przechowuje nazwę tabeli/arkusza
         /// </summary>
         private string tableName;
+
+        /// <summary>
+        /// Zmienna połącozna z polem w widoku, przechowuje nazwę tabeli/arkusza
+        /// </summary>
         public string TableName
         {
             get { return tableName; }
@@ -58,6 +66,10 @@ namespace ProjektTechniki.ViewModel
         /// Zmienna połącozna z polem w widoku, przechowuje rozszerzenie pliku, .xls lub .xlsx
         /// </summary>
         private string pathName;
+
+        /// <summary>
+        /// Zmienna połącozna z polem w widoku, przechowuje rozszerzenie pliku, .xls lub .xlsx
+        /// </summary>
         public string PathName
         {
             get { return pathName; }
