@@ -14,23 +14,73 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 
+
+/// <summary>
+/// Klasa odpowiadająca za 
+/// </summary>
 namespace ProjektTechniki.ViewModel
 {
+    /// <summary>
+    /// Klasa Widoku ActionLoadedBaseView, która połączona jest z tym widokiem i dzięki temu tutaj możliwe jest sterowaniem wyglądem oraz operacje na danych w tym widoku
+    /// </summary>
     public class ActionLoadedBaseViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Zmienna przechowująca orginalną Tablę do wyświetlania
+        /// </summary>
         private DataTable originalTable;
+
+        /// <summary>
+        /// Zmienna informująca o ilości przeszukiwań 
+        /// </summary>
         private int numberOfSearch=1;
 
+        /// <summary>
+        /// Deklaracja komendy przycisku otwierającego okna dodawania rekordu, powoduje wyświetlenie innego okna 
+        /// </summary>
         public RelayCommand AddRecordCommand { get; set; }
+
+        /// <summary>
+        /// Deklaracja komendy wywoływanej w moemencie ładowania okna/widoku, powoduje przeładowanie widoku
+        /// </summary>
         public RelayCommand OnLoad { get; set; }
+
+        /// <summary>
+        /// Deklaracja komendy wywoływanej podczas wychodzenia z okna/widoku, powoduje reset zmiennych
+        /// </summary>
         public RelayCommand OnUnload { get; set; }
+
+        /// <summary>
+        /// Deklaracja komendy wywoływanej podczas wciśnięcia przycisku Sortuj, powoduje wyyświetlenie okna wyboru sortowania
+        /// a następnie sortuje tabelę i wyświetla wynik
+        /// </summary>
         public RelayCommand SortRecordsCommand { get; set; }
+
+        /// <summary>
+        /// Deklaracja komendy wywoływanej podczas wciśnięcia przycisku usuń, powoduje usunięcia danego wiersza z pliku
+        /// </summary>
         public RelayCommand DeleteRecordCommand { get; set; }
+
+        /// <summary>
+        /// Deklaracja komendy wywoływanej podczas wciśnięcia przycisku Wyszukaj, powoduje wyświetlenie nowego okna
+        /// Dane wprowadzone w nowym oknie sa przekazywane do odpowiednich zmiennych, dzięki czemu możliwe wyszukanie odpowiednich komórek i wyświetlenie ich
+        /// </summary>
         public RelayCommand SearchRecordCommand { get; set; }
+
+        /// <summary>
+        /// Deklaracja komendy wywoływanej podczas wcisniecią przycisku Reset, powoduje reset wyświetlanych danych
+        /// </summary>
         public RelayCommand ResetCommand { get; set; }
 
+
+        /// <summary>
+        /// Zmienna zawierająca liczbę arkuszy w danym pliku
+        /// </summary>
         List<ISheet> sheets = new List<ISheet>();
 
+        /// <summary>
+        /// Zmienna typu DataTable, przechowująca tabelę do wyświetlania
+        /// </summary>
         private DataTable table;
         public DataTable Table
         {
@@ -38,7 +88,9 @@ namespace ProjektTechniki.ViewModel
             set { table = value; RaisePropertyChanged(() => Table); }
         }
 
-
+        /// <summary>
+        /// Zmienna przechowująca wybrany wiersz do usunięcia
+        /// </summary>
         private DataRowView selectedRow;
         public DataRowView SelectedRow
         {
@@ -46,21 +98,34 @@ namespace ProjektTechniki.ViewModel
             set { selectedRow = value; RaisePropertyChanged(() => SelectedRow); }
         }
 
+        /// <summary>
+        /// Kolekcja nazw Tabel
+        /// </summary>
         public ObservableCollection<string> TablesName
         {
             get;
             set;
         }
 
-        private string selectedName;
+        /// <summary>
+        /// Zmienna przechowująca wybrana nazwę tabeli
+        /// </summary>
+ 
         private string path;
 
+        /// <summary>
+        /// Zmienna przechowująca sciezkie do pliku
+        /// </summary>
+        private string selectedName;
         public string SelectedName
         {
             get { return selectedName; }
             set { selectedName = value; RaisePropertyChanged(() => SelectedName); if (!string.IsNullOrEmpty(value)) ChangeTable(); }
         }
 
+        /// <summary>
+        /// Zmienna pomagająca przy obliczaniu i wyświetlaniu czasu określonych działan
+        /// </summary>
         private double operationTime;
         public double OperationTime
         {
@@ -68,6 +133,9 @@ namespace ProjektTechniki.ViewModel
             set { operationTime = value; RaisePropertyChanged(() => OperationTime); }
         }
 
+        /// <summary>
+        /// Metoda wyświetlająca Tabele wybrana w ComboBoxie, uwzględniającą typy danych, puste wiersze i dodająca do wierszy numer id
+        /// </summary>
         private void ChangeTable()
         {
             var startTime = DateTime.Now;
@@ -206,12 +274,19 @@ namespace ProjektTechniki.ViewModel
             OperationTime = DateTime.Now.Subtract(startTime).TotalSeconds;
         }
 
+        /// <summary>
+        /// Konstruktor klasy inicjujący zmienną TablesName oraz wywołuje metodę InitCommand
+        /// </summary>
         public ActionLoadedBaseViewModel()
         {
             TablesName = new ObservableCollection<string>();
             InitCommand();
         }
 
+        /// <summary>
+        /// Metoda slużąca do pobrania wszystkich arkuszy z pliku i zapisania ich
+        /// Służy rownież do poprawnego wczytania pliku
+        /// </summary>
         private void Init()
         {
             var startTime = DateTime.Now;
@@ -255,6 +330,9 @@ namespace ProjektTechniki.ViewModel
             OperationTime = DateTime.Now.Subtract(startTime).TotalSeconds;
         }
 
+        /// <summary>
+        /// Metoda obsługująca wszystkie komendy występujące w widoku
+        /// </summary>
         private void InitCommand()
         {
             AddRecordCommand = new RelayCommand(() =>

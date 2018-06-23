@@ -102,7 +102,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Services\ExcelHelper.cs" />
     <Compile Include="Services\IMyNavigationService.cs" />
     <Compile Include="Services\MyNavigationService.cs" />
     <Compile Include="ViewModel\ActionLoadedBaseViewModel.cs" />

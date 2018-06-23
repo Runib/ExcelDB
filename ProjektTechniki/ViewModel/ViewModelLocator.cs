@@ -28,6 +28,9 @@ namespace ProjektTechniki.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
+        /// <summary>
+        /// Zmienne dostepne w ca³ej aplikacji, pozwalaj¹ one przechowywaæ dane wybrane przez u¿ytkownika jak i sciê¿kê do pliku
+        /// </summary>
         public static object Param;
         public static object ColumnsName;
         public static string sheetName;
@@ -35,16 +38,19 @@ namespace ProjektTechniki.ViewModel
         public static List<CellType> ColumnType = new List<CellType>();
         public static List<string> SearchData = new List<string>();
 
+        /// <summary>
+        /// Nazwy widoków dostêpnych w aplikacji przechowywane w stringach, aby móc je dodaæ do odpowiedniej metody
+        /// </summary>
         public const string CreateTableKey = "CreateTableView";
         public const string AddRecordKey = "AddRecordView";
         public const string CreateBaseKey = "CreateBaseView";
         public const string LoadBaseKey = "LoadBaseView";
         public const string CreateBaseAddColumnsKey = "CreateBaseAddColumnsView";
         public const string SortRecordsKey = "SortRecordsView";
+
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
         /// </summary>
-
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -61,6 +67,9 @@ namespace ProjektTechniki.ViewModel
             SimpleIoc.Default.Register<CreateBaseAddColumnsViewModel>();
         }
 
+        /// <summary>
+        /// Metoda nawiguj¹ca widokami, pozwala na wyœwietlnei wybranego widoku w danej chwili
+        /// </summary>
         private static void SetupNavigation()
         {
             var navigationService = new MyNavigationService();
@@ -68,11 +77,11 @@ namespace ProjektTechniki.ViewModel
             navigationService.Configure("LoadBaseView", new Uri("../View/LoadBaseView.xaml", UriKind.Relative));
             navigationService.Configure("CreateBaseAddColumnsView", new Uri("../View/CreateBaseAddColumnsView.xaml", UriKind.Relative));
             SimpleIoc.Default.Register<IMyNavigationService>(() => navigationService);
-            // ten kontener IoC moze przechowywac rozne serwisy, do ktorych sie mozesz odwolywac w ViewModelach.
-            //oo no dobra wazne info
         }
 
-
+        /// <summary>
+        /// Zmienna przechowuj¹ca nazwê ViewModelu glównego okna
+        /// </summary>
         public MainViewModel Main
         {
             get
@@ -81,8 +90,10 @@ namespace ProjektTechniki.ViewModel
             }
         }
 
-        
 
+        /// <summary>
+        /// Zmienna przechowuj¹ca nazwê ViewModelu okna tworzenia bazy/pliku
+        /// </summary>
         public CreateBaseViewModel CreateBaseViewModel
         {
             get
@@ -91,6 +102,9 @@ namespace ProjektTechniki.ViewModel
             }
         }
 
+        /// <summary>
+        /// Zmienna przechowuj¹ca nazwê ViewModelu okna wyszukiwania
+        /// </summary>
         public SearchRecordViewModel SearchRecord
         {
             get
@@ -99,6 +113,9 @@ namespace ProjektTechniki.ViewModel
             }
         }
 
+        /// <summary>
+        /// Zmienna przechowuj¹ca nazwê ViewModelu okna ³adowania pliku/bazy
+        /// </summary>
         public LoadBaseViewModel LoadBase
         {
             get
@@ -107,6 +124,9 @@ namespace ProjektTechniki.ViewModel
             }
         }
 
+        /// <summary>
+        /// Zmienna przechowuj¹ca nazwê ViewModelu okna wyœwietlaj¹cego zawartoœæ tabel
+        /// </summary>
         public ActionLoadedBaseViewModel ActionLoadedBase
         {
             get
@@ -115,6 +135,9 @@ namespace ProjektTechniki.ViewModel
             }
         }
 
+        /// <summary>
+        /// Zmienna przechowuj¹ca nazwê ViewModelu okna dodawania rekordu
+        /// </summary>
         public AddRecordViewModel AddRecord
         {
             get
@@ -123,6 +146,9 @@ namespace ProjektTechniki.ViewModel
             }
         }
 
+        /// <summary>
+        /// Zmienna przechowuj¹ca nazwê ViewModelu okna sortowania
+        /// </summary>
         public SortRecordsViewModel SortRecords
         {
             get
@@ -131,6 +157,9 @@ namespace ProjektTechniki.ViewModel
             }
         }
 
+        /// <summary>
+        /// Zmienna przechowuj¹ca nazwê ViewModelu okna dodawania kolumnd o tabeli
+        /// </summary>
         public CreateBaseAddColumnsViewModel AddColumns
         {
             get
@@ -139,7 +168,8 @@ namespace ProjektTechniki.ViewModel
             }
         }
 
-                public static void Cleanup()
+
+        public static void Cleanup()
         {
             // TODO Clear the ViewModels
         }

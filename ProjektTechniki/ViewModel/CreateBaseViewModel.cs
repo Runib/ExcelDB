@@ -16,11 +16,27 @@ using System.Windows;
 
 namespace ProjektTechniki.ViewModel
 {
+    /// <summary>
+    /// Klasa widoku CreateBaseView, odpowiedzialna za tworzenie pliku i jednego arkusza 
+    /// o nazwach i rozszerzeniu podanym przez użytkownika
+    /// </summary>
     public class CreateBaseViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Zmienna nawigująca do kolejnego widoku
+        /// </summary>
         private IMyNavigationService navigationService;
+
+        /// <summary>
+        /// Deklaracja komendy odpowiedzialnej za stworzenie bazy o podanych parametrach przez uzytkownika
+        /// wywoływana podczas wciśnięcia przycisku
+        /// Przechodzi do kolejnego widoku
+        /// </summary>
         public RelayCommand CreateBaseCommand { get; set; }
 
+        /// <summary>
+        /// Zmienna połącozna z polem w widoku, przechowuje nazwę bazy/pliku
+        /// </summary>
         private string baseName;
         public string BaseName
         {
@@ -28,6 +44,9 @@ namespace ProjektTechniki.ViewModel
             set { baseName = value; RaisePropertyChanged(() => BaseName); }
         }
 
+        /// <summary>
+        /// Zmienna połącozna z polem w widoku, przechowuje nazwę tabeli/arkusza
+        /// </summary>
         private string tableName;
         public string TableName
         {
@@ -35,6 +54,9 @@ namespace ProjektTechniki.ViewModel
             set { tableName = value; RaisePropertyChanged(() => TableName); }
         }
 
+        /// <summary>
+        /// Zmienna połącozna z polem w widoku, przechowuje rozszerzenie pliku, .xls lub .xlsx
+        /// </summary>
         private string pathName;
         public string PathName
         {
@@ -42,14 +64,22 @@ namespace ProjektTechniki.ViewModel
             set { pathName = value; RaisePropertyChanged(() => PathName); }
         }
 
-        public CreateBaseViewModel DataContext { get; private set; }
-
+        /// <summary>
+        /// Konstruktor klasy
+        /// Ustawia zmienną nawigującą
+        /// Wywołuje metodę InitCommand
+        /// </summary>
+        /// <param name="navService"></param>
         public CreateBaseViewModel(IMyNavigationService navService)
         {
             navigationService = navService;
             InitCommand();
         }
 
+        /// <summary>
+        /// Metoda zawierająca inizjalizację wszystkich komend w widoku
+        /// W tym widoku jest tylko jedna komenda opisana wyżej
+        /// </summary>
         private void InitCommand()
         {
             CreateBaseCommand = new RelayCommand(() =>

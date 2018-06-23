@@ -25,9 +25,6 @@ namespace ProjektTechniki.View
             InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

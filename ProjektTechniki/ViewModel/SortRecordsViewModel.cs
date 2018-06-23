@@ -11,17 +11,35 @@ using System.Windows;
 
 namespace ProjektTechniki.ViewModel
 {
+    /// <summary>
+    /// Klasa widoku SortRecordsView
+    /// Pobiera dane wybrane przez użytkownika w widoku i podaje dalej do widoku wyświetlania
+    /// </summary>
     public class SortRecordsViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Kolekcja zawierająca nazwy kolumn tabeli
+        /// </summary>
         public ObservableCollection<string> TablesName
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Deklaracja komendy wywoływanej podczas kliknięciu przycisku Sortuj, przekazuje wybrane dane przez użytkownika
+        /// Dodatkowo zamyka okno widoku
+        /// </summary>
         public RelayCommand<object> SortCommand { get; set; }
+
+        /// <summary>
+        /// Komenda wywoływana podczas ładowania okna
+        /// </summary>
         public RelayCommand OnLoad { get; set; }
 
+        /// <summary>
+        /// Zmienna przechowująca tabelę, pomagająca przy pobraniu nazw kolumn tabeli
+        /// </summary>
         private DataTable table;
         public DataTable Table
         {
@@ -29,6 +47,9 @@ namespace ProjektTechniki.ViewModel
             set { table = value; RaisePropertyChanged(() => Table); }
         }
 
+        /// <summary>
+        /// Zmienna przechowująca sposób sortowania
+        /// </summary>
         private string sortBy;
         public string SortBy
         {
@@ -36,6 +57,9 @@ namespace ProjektTechniki.ViewModel
             set { sortBy = value; RaisePropertyChanged(() => SortBy); }
         }
 
+        /// <summary>
+        /// Zmienna przechowująca wybraną nazwe kolumny którą użytkownik chce posortować
+        /// </summary>
         private string selectedName;
         public string SelectedName
         {
@@ -43,12 +67,18 @@ namespace ProjektTechniki.ViewModel
             set { selectedName = value; RaisePropertyChanged(() => SelectedName); }
         }
 
+        /// <summary>
+        /// Kontruktor klasy, inicjalizuje zmienną TablesName oraz wywołuje metodę InitCommand
+        /// </summary>
         public SortRecordsViewModel()
         {
             InitCommand();
             TablesName = new ObservableCollection<string>();
         }
 
+        /// <summary>
+        /// MEtoda zawierająca ciała komnd zadeklarowanych wcześniej, zapamiętuje wybrany wybór użytkownika i zamyka okno
+        /// </summary>
         private void InitCommand()
         {
             SortCommand = new RelayCommand<object>(w =>
@@ -85,6 +115,9 @@ namespace ProjektTechniki.ViewModel
             });
         }
 
+        /// <summary>
+        /// Metoda pobierająca nazwy kolumn i dodaję je do odpowiedniej zmiennej
+        /// </summary>
         public void Init()
         {
             TablesName.Clear();

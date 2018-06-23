@@ -17,13 +17,31 @@ using System.Windows.Data;
 
 namespace ProjektTechniki.ViewModel
 {
+    /// <summary>
+    /// Klasa widoku AddRecordViewModel
+    /// Połączona z widokiem, pobiera od niego wypełnione wiersze a nastepnie dodaje do pliku
+    /// Nazwy kolumn pobiera ze zmiennej zawierającej nazwykolumn i dostępnej z klasy ViewModelLocator
+    /// </summary>
     public class AddRecordViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Zmienna zawierająca wszystkie wiersze które należy dodać do pliku
+        /// </summary>
         private List<string[]> RowsList = new List<string[]>();
 
+        /// <summary>
+        /// Deklaracja komendy wywoływanej podczas wciśnięcia przycisku Dodaj, dodaje do pliku odpowiednie wiersze uwzględniając typ i wychodiz z okna
+        /// </summary>
         public RelayCommand<object> AddRecordCommand { get; set; }
+
+        /// <summary>
+        /// Zmienna wywolywana podczas każdej zmiany wartości komórki w oknie wykonanej przez użytkownika
+        /// </summary>
         public RelayCommand<object> RowEditEndingCommand { get; set; }
 
+        /// <summary>
+        /// Deklaracja zmiennej służącej do odpowiednie wczytania nazw kolumn
+        /// </summary>
         private DataTable table;
         public DataTable Table
         {
@@ -31,6 +49,9 @@ namespace ProjektTechniki.ViewModel
             set { table = value; RaisePropertyChanged(() => Table); }
         }
 
+        /// <summary>
+        /// Deklaracja zmiennej przechowującej nazwy kolumn
+        /// </summary>
         private DataTable columnsName;
         public DataTable ColumnsName
         {
@@ -38,6 +59,9 @@ namespace ProjektTechniki.ViewModel
             set { columnsName = value; RaisePropertyChanged(() => ColumnsName); }
         }
 
+        /// <summary>
+        /// Deklaracja zmiennej pomocnicza, pomaga przy dodawaniu wierszy do pliku
+        /// </summary>
         private DataRowView selectedItem;
         public DataRowView SelectedItem
         {
@@ -46,13 +70,21 @@ namespace ProjektTechniki.ViewModel
         }
 
        
-
+        /// <summary>
+        /// Konstruktor klasy wywołujący dwie metody, Init oraz InitCommand
+        /// </summary>
         public AddRecordViewModel()
         {
             Init();
             InitCommand();
         }
 
+        /// <summary>
+        /// Metoda obsługująca wszystkie komendy połączone z przyciskami 
+        /// Dodaje wiersze niepuste do pliku uwzgledniajac ich typ
+        /// Uwzglednia kazda zmiane wartości komórek w wyświetlanej tabeli
+        /// Sprawdza wyjątki kiedy typ się nie zgadza 
+        /// </summary>
         private void InitCommand()
         {
             RowEditEndingCommand = new RelayCommand<object>(e =>
@@ -233,6 +265,9 @@ namespace ProjektTechniki.ViewModel
            );
         }
 
+        /// <summary>
+        /// Metoda której zadaniem jest pobranie nazw kolumn i poprzez połączenie przekazanie ich do widoku
+        /// </summary>
         private void Init()
         {
             Table = new DataTable();

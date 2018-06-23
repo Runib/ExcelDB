@@ -11,19 +11,36 @@ using System.Windows;
 
 namespace ProjektTechniki.ViewModel
 {
+    /// <summary>
+    /// Klasa widoku SearchRecordViewModel
+    /// obłsuguje przyciski oraz pola w widoku
+    /// Przekazuje wybrane parametry do okna wyświetlania
+    /// </summary>
     public class SearchRecordViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Deklaracja komendy połącoznej z przyciskiem zatwierdzajacym
+        /// Zapamietuje wszystkie pobrane dane i zamyka okna widoku
+        /// </summary>
         public RelayCommand<object> SearchCommand { get; set; }
+
+        /// <summary>
+        /// Komenda, wywoływana podczas odświeżania okna/ładowania okna
+        /// </summary>
         public RelayCommand OnLoad { get; set; }
 
-
-
+        /// <summary>
+        /// Kolekcja zawierająca nazwy Tabel dostępnych z widoku wyswietlania
+        /// </summary>
         public ObservableCollection<string> TablesName
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Zmienna przechowująca nazwę kolumny wybrana przez użytkownika
+        /// </summary>
         private string selectedName;
         public string SelectedName
         {
@@ -31,6 +48,9 @@ namespace ProjektTechniki.ViewModel
             set { selectedName = value; RaisePropertyChanged(() => SelectedName); }
         }
 
+        /// <summary>
+        /// Zmienna przechowująca tekst wyszukiwany wpisany przez użytkownika
+        /// </summary>
         private string searchText;
         public string SearchText
         {
@@ -38,6 +58,9 @@ namespace ProjektTechniki.ViewModel
             set { searchText = value; RaisePropertyChanged(() => SearchText); }
         }
 
+        /// <summary>
+        /// Zmienna pomagająca pobrać nazwy kolumn
+        /// </summary>
         private DataTable table;
         public DataTable Table
         {
@@ -45,12 +68,20 @@ namespace ProjektTechniki.ViewModel
             set { table = value; RaisePropertyChanged(() => Table); }
         }
 
+
+        /// <summary>
+        /// Konstruktor klasy, inicjalizuje zmienną TablesName oraz wywołuje metodę InitCommand
+        /// </summary>
         public SearchRecordViewModel()
         {
             TablesName = new ObservableCollection<string>();
             InitCommand();
         }
 
+        /// <summary>
+        /// Metoda zawierająca ciała wszystkich zadeklarowanych komend
+        /// Zapamiętuje dane wybrane przez użytkownika, zamyka okno
+        /// </summary>
         private void InitCommand()
         {
             SearchCommand = new RelayCommand<object>(w=>
@@ -81,6 +112,9 @@ namespace ProjektTechniki.ViewModel
             });
         }
 
+        /// <summary>
+        /// Metoda pobierająca nazwy kolumn ze zmiennej dostepnej z klasy ViewModelLocator
+        /// </summary>
         private void Init()
         {
             Table = new DataTable();

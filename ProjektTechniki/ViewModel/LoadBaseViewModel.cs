@@ -11,15 +11,33 @@ using System.Threading.Tasks;
 
 namespace ProjektTechniki.ViewModel 
 {
+    /// <summary>
+    /// Klasa połączona z widokiem LoadBaseView
+    /// Odpowiedzialna za wybranie pliku z komputera i zapamiętanie ścieżki gdzie on sie znajduje
+    /// </summary>
     public class LoadBaseViewModel : ViewModelBase
     {
+
+        /// <summary>
+        /// Zmienna nawigująca pomiędzy widokami
+        /// </summary>
         private IMyNavigationService navigationService;
      
+        /// <summary>
+        /// Deklaracja komendy wywoływanej podczas wciśnięcia odpowiedniego przycisku
+        /// Jej zadaniem jest zapamiętanie ścieżki do pliku wybranego przez użytkownika
+        /// </summary>
         public RelayCommand LoadBaseCommand { get; set; }
+
+        /// <summary>
+        /// Komendy wywoływana podczas zatwierdzenia wyboru użytkownika
+        /// powoduje przejście do kolejnego widoku applikacji
+        /// </summary>
         public RelayCommand AcceptBaseCommand { get; set; }
 
-        
-
+        /// <summary>
+        /// Zmienna przechowująca scięzkę do pliku
+        /// </summary>
         private string baseName;
         public string BaseName
         {
@@ -27,12 +45,19 @@ namespace ProjektTechniki.ViewModel
             set { baseName = value; RaisePropertyChanged(() => BaseName); }
         }
 
+        /// <summary>
+        /// Konstruktor klasy, ustawia zmienna nawigującą oraz wywołuje metodę InitCommand
+        /// </summary>
+        /// <param name="navService"></param>
         public LoadBaseViewModel(IMyNavigationService navService)
         {
             navigationService = navService;
             InitCommand();
         }
 
+        /// <summary>
+        /// Metoda zawierająca inicjalizację komend opisanych wyżej
+        /// </summary>
         private void InitCommand()
         {
             LoadBaseCommand = new RelayCommand(() => {

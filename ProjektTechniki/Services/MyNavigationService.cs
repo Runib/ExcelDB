@@ -11,15 +11,38 @@ using System.Windows;
 using System.Windows.Media;
 using System.Runtime.CompilerServices;
 
+
 namespace ProjektTechniki.Services
 {
+    /// <summary>
+    /// Klasa która jest serwerem nawigacji. Służy do nawigowania pomiędzy oknami i stronami w aplikacji
+    /// Dzidziczy z Interfejsu nawigowania oraz interfejsu powiadamiania klientów że właściwość została zmieniona. 
+    /// </summary>
     class MyNavigationService : IMyNavigationService,INotifyPropertyChanged
     {
-
+        /// <summary>
+        /// Zmienna przechowująca informacje o stronach do ktorych można się skierować w aplikacji
+        /// </summary>
         private readonly Dictionary<string, Uri> _pagesByKey;
+
+        /// <summary>
+        /// Zmienna przechowująca historię przejść międyz oknami i stronami
+        /// </summary>
         private readonly List<string> _historic;
+
+        /// <summary>
+        /// Zmienna przechowujaca aktualną nazwę strony
+        /// </summary>
         private string _currentPageKey;
-                                            
+
+        /// <summary>
+        /// Event jako zmienna informująca o zmianie właściwości
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Oraz zmienne z właściwościami get oraz set służące do ustanawiania aktualnego klucza strony
+        /// </summary>
         public string CurrentPageKey
         {
             get
@@ -39,11 +62,22 @@ namespace ProjektTechniki.Services
             }
         }
         public object Parameter { get; private set; }
+
+
+
+
+        /// <summary>
+        /// Konstruktor klasy tworzący obiekty pozwalające przechowywać klucze klasy oraz historię przejść
+        /// </summary>
         public MyNavigationService()
         {
             _pagesByKey = new Dictionary<string, Uri>();
             _historic = new List<string>();
         }
+
+        /// <summary>
+        /// Metoda pozwalająca wrócić do poprzedniego okna/widoku
+        /// </summary>
         public void GoBack()
         {
             if (_historic.Count > 1)
@@ -52,11 +86,43 @@ namespace ProjektTechniki.Services
                 NavigateTo(_historic.Last(), null);
             }
         }
+
+        /// <summary>
+        /// Metoda której zadaniem jest przechowywanie wszystkich widoków danego okna/okna main
+        /// </summary>
+        /// <param name="key">Nazwa widoku</param>
+        /// <param name="pageType">Typ widoku</param>
+        public void Configure(string key, Uri pageType)
+        {
+            lock (_pagesByKey)
+            {
+                if (_pagesByKey.ContainsKey(key))
+                {
+                    _pagesByKey[key] = pageType;
+                }
+                else
+                {
+                    _pagesByKey.Add(key, pageType);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Metoda służaca do nawigowania do strony z podanym kluczem jako parametrem
+        /// </summary>
+        /// <param name="pageKey"> parametr który jest stringiem i przechowuje nazwe strony do której chcemy przeskoczyć</param>
         public void NavigateTo(string pageKey)
         {
             NavigateTo(pageKey, null);
         }
 
+        /// <summary>
+        /// Metoda przeciążona, służąca do nawigowania jednak można przekezać przez nią jakieś dane
+        /// Które zostaną przekazane do kolejnego widoku
+        /// Metoda ustanawia aktualna stronę
+        /// </summary>
+        /// <param name="pageKey">parametr który jest stringiem i przechowuje nazwe strony do której chcemy przeskoczyć</param>
+        /// <param name="parameter">Dane które można przekazać do kolejnego widoku</param>
         public virtual void NavigateTo(string pageKey, object parameter)
         {
             lock (_pagesByKey)
@@ -78,21 +144,12 @@ namespace ProjektTechniki.Services
             }
         }
 
-        public void Configure(string key, Uri pageType)
-        {
-            lock (_pagesByKey)
-            {
-                if (_pagesByKey.ContainsKey(key))
-                {
-                    _pagesByKey[key] = pageType;
-                }
-                else
-                {
-                    _pagesByKey.Add(key, pageType);
-                }
-            }
-        }
-
+        /// <summary>
+        /// Metoda poszukujaca "potomka danego elementu w UI. Potomek wuszykiwnay według przekazanej nazwy
+        /// </summary>
+        /// <param name="parent">Przekazywany rodzic którego potomek będzie wyszukiwany</param>
+        /// <param name="name">Nazwa potomka w danym obiekcie którego chcemy znaleźć</param>
+        /// <returns></returns>
         private static FrameworkElement GetDescendantFromName(DependencyObject parent, string name)
         {
             var count = VisualTreeHelper.GetChildrenCount(parent);
@@ -122,8 +179,10 @@ namespace ProjektTechniki.Services
             return null;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        /// <summary>
+        /// Wirtualna metoda ustanawiająca uchwyt do obiektu , tzn ustawianie identyfikatora obiektu
+        /// </summary>
+        /// <param name="propertyName">Nazwa uchwytu jako string</param>
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
