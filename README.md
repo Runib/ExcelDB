@@ -1,12 +1,10 @@
 # ExcelDB
-=======================================================================================================================================
 Program służy do tworzenia plików z rozszerzeniem .xls lub .xlsx, które zawierają arkusz z komórkami w formie tabeli. Tabela przyjmuje 
 kształt nazwy kolumn wraz z rekordami. Traktowana jest jako pojedynca tabela w bazie danych. Oprócz tworzenia nowych plików, jest
 możliwość ładowania istniejącacyh plików wraz z wszystkimi arkuszami/tabelami i wypełnionymi komórkami w odpowiednim formacie.
 Aplikacja potrafi rozpoznawać podstawowe typy danych jak: Numeric, String oraz Boolean.
 
 ## Wymagania wstępne
-=======================================================================================================================================
 Projekt tworzony był z użyciem Visual Studio 2017. Wykorzystuje on bibliotekę NPOI pozwalającą na operację na plikach z rozszerzeniem
 .xls oraz .xlsx. Wczytany może zostać dowolny plik z tym rozszerzeniem.
 
